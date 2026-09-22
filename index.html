@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width,
 initial-scale=1.0,
@@ -10,189 +13,320 @@ user-scalable=no">
 
 <title>Sheffield Skyline</title>
 
+
 <style>
+
+/* ---------------------------
+BASIC PAGE
+--------------------------- */
+
 * {
 box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+
 margin: 0;
 padding: 0;
+
 width: 100%;
 height: 100%;
+
 overflow: hidden;
+
 font-family: Arial, sans-serif;
+
 background: #111;
 }
 
-#sky {
+
+/* ---------------------------
+CAMERA
+--------------------------- */
+
+#camera {
+
 position: fixed;
+
 top: 0;
 left: 0;
+
 width: 100vw;
 height: 100vh;
-background: transparent;
-z-index: 2;
-);
+
+object-fit: cover;
+
+z-index: 1;
+
+background: black;
 }
 
+
+/* ---------------------------
+OVERLAY
+--------------------------- */
+
+#sky {
+
+position: fixed;
+
+top: 0;
+left: 0;
+
+width: 100vw;
+height: 100vh;
+
+background: transparent;
+
+z-index: 2;
+}
+
+
+/* ---------------------------
+TITLE
+--------------------------- */
+
 #title {
+
 position: absolute;
+
 top: 20px;
 left: 20px;
 right: 20px;
+
 text-align: center;
+
 color: white;
+
 font-size: 24px;
+
 font-weight: bold;
+
 text-shadow: 0 2px 5px #000;
+
 z-index: 10;
 }
 
-#status {
-position: absolute;
-bottom: 20px;
-left: 20px;
-right: 20px;
-padding: 12px;
-background: rgba(0,0,0,0.7);
-color: white;
-border-radius: 10px;
-text-align: center;
-z-index: 20;
-pointer-events: auto;
-}
+
+/* ---------------------------
+START BUTTON
+--------------------------- */
 
 #start {
+
 position: absolute;
+
 top: 70px;
+
 left: 50%;
-transform: translateX(-50%);
-padding: 14px 22px;
+
+transform:
+translateX(-50%);
+
+padding:
+14px 22px;
+
 border: none;
+
 border-radius: 25px;
+
 background: white;
+
 color: #222;
+
 font-size: 17px;
+
 font-weight: bold;
+
 z-index: 100;
+
 pointer-events: auto;
 }
 
-.building {
+
+/* ---------------------------
+STATUS
+--------------------------- */
+
+#status {
+
 position: absolute;
-transform: translate(-50%, -50%);
-padding: 7px 10px;
-background: rgba(0,0,0,0.75);
+
+bottom: 20px;
+
+left: 20px;
+right: 20px;
+
+padding: 12px;
+
+background:
+rgba(0,0,0,0.7);
+
 color: white;
-border-radius: 8px;
-white-space: nowrap;
-font-size: 12px;
+
+border-radius: 10px;
+
+text-align: center;
+
+z-index: 20;
+}
+
+
+/* ---------------------------
+COMPASS DISPLAY
+--------------------------- */
+
+#compass {
+
+position: absolute;
+
+top: 50%;
+left: 50%;
+
+transform:
+translate(-50%, -50%);
+
+width: 70px;
+height: 70px;
+
+border:
+3px solid white;
+
+border-radius: 50%;
+
+background:
+rgba(0,0,0,0.4);
+
+color: white;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+font-size: 18px;
+
 font-weight: bold;
-box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+
+z-index: 15;
+}
+
+
+/* ---------------------------
+BUILDING LABEL
+--------------------------- */
+
+.building {
+
+position: absolute;
+
+transform:
+translate(-50%, -50%);
+
+padding:
+7px 10px;
+
+background:
+rgba(0,0,0,0.75);
+
+color: white;
+
+border-radius: 8px;
+
+white-space: nowrap;
+
+font-size: 12px;
+
+font-weight: bold;
+
+box-shadow:
+0 2px 8px
+rgba(0,0,0,0.4);
+
 z-index: 10;
 }
 
+
+/* ---------------------------
+BUILDING DOT
+--------------------------- */
+
 .building::after {
+
 content: "";
+
 position: absolute;
+
 width: 8px;
 height: 8px;
+
 background: white;
+
 border-radius: 50%;
+
 bottom: -14px;
+
 left: 50%;
-transform: translateX(-50%);
+
+transform:
+translateX(-50%);
 }
 
-#compass {
-  position: absolute;
-  top: 50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
-  border: 3px solid white;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.4);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 15;
-}
-
-#camera {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 1;
-  background: black;
-}
 </style>
+
 </head>
+
 
 <body>
 
-<video id="camera" autoplay playsinline muted></video>
+
+<!-- CAMERA -->
+
+<video
+id="camera"
+autoplay
+playsinline
+muted>
+</video>
+
+
+<!-- AR OVERLAY -->
 
 <div id="sky">
-  
+
+
 <div id="title">
 Sheffield Skyline
 </div>
+
 
 <button id="start">
 Start Compass
 </button>
 
+
 <div id="status">
 Waiting to start…
 </div>
+
+
 <div id="compass">
-  N
+N
 </div>
+
+
 </div>
+
+
 
 <script>
 
-async function startCamera() {
-  try {
-    const video = document.getElementByID("camera");
-    
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: { 
-          ideal: "environment" 
-        }
-      },
-      audio: false
-    });
 
-    video.srcObject = stream;
+/* =====================================================
+BUILDINGS
+===================================================== */
 
-    await video.play();
-
-    status.innerText =
-      "Camera started";
-
-    } catch (error) {
-    
-    status.innerText = 
-      "Camera error: " + 
-      error.name +
-      " - " +
-      error.message;
-    
-   console.error(error);
-  }
-  
-}
 const buildings = [
 
 {
@@ -201,11 +335,11 @@ lat: 53.3811,
 lon: -1.4701
 },
 
-  {
-    name: "Hallam Primary School",
-    lat: 53.3727,
-    lon: -1.5434
-  },
+{
+name: "Hallam Primary School",
+lat: 53.3727,
+lon: -1.5434
+},
 
 {
 name: "Park Hill",
@@ -234,281 +368,610 @@ lon: -1.4694
 ];
 
 
+
+/* =====================================================
+VARIABLES
+===================================================== */
+
 let userLat = null;
+
 let userLon = null;
+
 let heading = null;
 
 
-const status = document.getElementById("status");
-const startButton = document.getElementById("start");
+
+const status =
+document.getElementById("status");
+
+const startButton =
+document.getElementById("start");
+
+const camera =
+document.getElementById("camera");
 
 
-/* ---------------------------
+
+/* =====================================================
 DISTANCE
---------------------------- */
+===================================================== */
 
-function distance(lat1, lon1, lat2, lon2) {
+function distance(
+lat1,
+lon1,
+lat2,
+lon2
+) {
 
 const R = 6371000;
 
-const p1 = lat1 * Math.PI / 180;
-const p2 = lat2 * Math.PI / 180;
+
+const p1 =
+lat1 *
+Math.PI / 180;
+
+
+const p2 =
+lat2 *
+Math.PI / 180;
+
 
 const dp =
 (lat2 - lat1) *
 Math.PI / 180;
 
+
 const dl =
 (lon2 - lon1) *
 Math.PI / 180;
 
+
 const a =
+
 Math.sin(dp / 2) *
-Math.sin(dp / 2) +
+Math.sin(dp / 2)
+
++
 
 Math.cos(p1) *
 Math.cos(p2) *
 Math.sin(dl / 2) *
 Math.sin(dl / 2);
 
+
 const c =
+
 2 *
 Math.atan2(
 Math.sqrt(a),
 Math.sqrt(1 - a)
 );
 
+
 return R * c;
+
 }
 
 
-/* ---------------------------
+
+/* =====================================================
 BEARING
---------------------------- */
+===================================================== */
 
-function bearing(lat1, lon1, lat2, lon2) {
+function bearing(
+lat1,
+lon1,
+lat2,
+lon2
+) {
 
-const p1 = lat1 * Math.PI / 180;
-const p2 = lat2 * Math.PI / 180;
+const p1 =
+lat1 *
+Math.PI / 180;
+
+
+const p2 =
+lat2 *
+Math.PI / 180;
+
 
 const dl =
 (lon2 - lon1) *
 Math.PI / 180;
 
+
 const y =
-Math.sin(dl) * Math.cos(p2);
+Math.sin(dl) *
+Math.cos(p2);
+
 
 const x =
-Math.cos(p1) * Math.sin(p2) -
+
+Math.cos(p1) *
+Math.sin(p2)
+
+-
+
 Math.sin(p1) *
 Math.cos(p2) *
 Math.cos(dl);
 
+
 let b =
+
 Math.atan2(y, x) *
 180 / Math.PI;
 
-return (b + 360) % 360;
+
+return (
+b + 360
+) % 360;
+
 }
 
 
-/* ---------------------------
-SHOW BUILDINGS
---------------------------- */
+
+/* =====================================================
+UPDATE BUILDINGS
+===================================================== */
 
 function updateBuildings() {
 
-    if (
-        userLat === null ||
-        userLon === null ||
-        heading === null
-    ) {
-        return;
-    }
 
-    document
-        .querySelectorAll(".building")
-        .forEach(el => el.remove());
+/* No position yet */
 
+if (
 
-    // Calculate distance and bearing for every building
-    const visibleBuildings = buildings
-        .map(building => {
+userLat === null ||
 
-            const buildingDistance =
-                distance(
-                    userLat,
-                    userLon,
-                    building.lat,
-                    building.lon
-                );
+userLon === null ||
 
-            const b =
-                bearing(
-                    userLat,
-                    userLon,
-                    building.lat,
-                    building.lon
-                );
+heading === null
 
-            let difference =
-                b - heading;
+) {
 
-            difference =
-                (difference + 540) % 360 - 180;
+return;
 
-            return {
-                ...building,
-                distance: buildingDistance,
-                bearing: b,
-                difference: difference
-            };
-
-        })
-
-        // Only keep buildings within our 120° view
-        .filter(building =>
-            Math.abs(building.difference) <= 60
-        )
-
-        // Furthest first
-        .sort((a, b) =>
-            b.distance - a.distance
-        );
-
-
-    // Draw the buildings
-    visibleBuildings.forEach(building => {
-
-        const screenX =
-            50 +
-            (building.difference / 60) * 50;
-
-
-        const marker =
-            document.createElement("div");
-
-        marker.className =
-            "building";
-
-
-        // Smaller labels for distant buildings
-        const size =
-            Math.max(
-                9,
-                Math.min(
-                    15,
-                    18 - (building.distance / 1000)
-                )
-            );
-
-        marker.style.fontSize =
-            size + "px";
-
-
-        marker.innerText =
-            building.name;
-
-
-        marker.style.left =
-            screenX + "%";
-
-        marker.style.top =
-            "45%";
-
-
-        document
-            .getElementById("sky")
-            .appendChild(marker);
-
-    });
 }
 
-/* ---------------------------
+
+
+/* Remove old labels */
+
+document
+.querySelectorAll(".building")
+.forEach(el =>
+el.remove()
+);
+
+
+
+/*
+
+Calculate information
+about every building.
+
+*/
+
+const visibleBuildings =
+
+buildings
+
+.map(building => {
+
+
+const buildingDistance =
+
+distance(
+
+userLat,
+userLon,
+
+building.lat,
+building.lon
+
+);
+
+
+
+const b =
+
+bearing(
+
+userLat,
+userLon,
+
+building.lat,
+building.lon
+
+);
+
+
+
+let difference =
+
+b - heading;
+
+
+
+difference =
+
+(
+difference + 540
+) % 360 - 180;
+
+
+
+return {
+
+...building,
+
+distance:
+buildingDistance,
+
+bearing:
+b,
+
+difference:
+difference
+
+};
+
+})
+
+
+/*
+
+Only show buildings
+within 120° field of view.
+
+*/
+
+.filter(building =>
+
+Math.abs(
+building.difference
+) <= 60
+
+)
+
+
+/*
+
+Furthest first.
+
+Nearer buildings are
+drawn on top.
+
+*/
+
+.sort((a, b) =>
+
+b.distance -
+a.distance
+
+);
+
+
+
+/* =================================================
+DRAW BUILDINGS
+================================================= */
+
+
+visibleBuildings.forEach(
+building => {
+
+
+/*
+
+Horizontal position.
+
+*/
+
+const screenX =
+
+50 +
+
+(
+building.difference /
+60
+) * 50;
+
+
+
+/*
+
+Create label.
+
+*/
+
+const marker =
+document.createElement("div");
+
+
+marker.className =
+"building";
+
+
+
+/*
+
+Smaller text
+for distant buildings.
+
+*/
+
+const size =
+
+Math.max(
+
+9,
+
+Math.min(
+
+15,
+
+18 -
+(
+building.distance /
+1000
+)
+
+)
+
+);
+
+
+
+marker.style.fontSize =
+size + "px";
+
+
+
+marker.innerText =
+building.name;
+
+
+
+marker.style.left =
+screenX + "%";
+
+
+/*
+For now all labels
+sit at roughly the
+same height.
+*/
+
+marker.style.top =
+"45%";
+
+
+
+document
+.getElementById("sky")
+.appendChild(marker);
+
+}
+
+);
+
+}
+
+
+
+/* =====================================================
 LOCATION
---------------------------- */
+===================================================== */
 
 function getLocation() {
 
-if (!navigator.geolocation) {
+
+if (
+!navigator.geolocation
+) {
 
 status.innerText =
 "Location isn't available.";
 
 return;
+
 }
+
 
 
 status.innerText =
 "Getting your location…";
 
 
-navigator.geolocation.getCurrentPosition(
+
+navigator
+.geolocation
+.getCurrentPosition(
 
 position => {
 
+
 userLat =
 position.coords.latitude;
+
 
 userLon =
 position.coords.longitude;
 
 
+
 status.innerText =
 "Location found. Point your phone around.";
+
 
 updateBuildings();
 
 },
 
+
 error => {
 
+
 status.innerText =
+
 "Couldn't get your location: " +
+
 error.message;
 
 },
 
+
 {
-enableHighAccuracy: true,
-timeout: 10000,
-maximumAge: 0
+
+enableHighAccuracy:
+true,
+
+timeout:
+10000,
+
+maximumAge:
+0
+
 }
+
 );
+
 }
 
 
-/* ---------------------------
+
+/* =====================================================
+CAMERA
+===================================================== */
+
+async function startCamera() {
+
+
+try {
+
+
+status.innerText =
+"Starting camera…";
+
+
+const stream =
+
+await navigator
+.mediaDevices
+.getUserMedia({
+
+video: {
+
+facingMode: {
+ideal:
+"environment"
+}
+
+},
+
+audio: false
+
+});
+
+
+
+camera.srcObject =
+stream;
+
+
+
+await camera.play();
+
+
+
+status.innerText =
+"Camera started. Starting compass…";
+
+
+}
+
+catch (error) {
+
+
+status.innerText =
+
+"Camera error: " +
+
+error.name +
+
+" - " +
+
+error.message;
+
+
+console.error(error);
+
+}
+
+}
+
+
+
+/* =====================================================
 COMPASS
---------------------------- */
+===================================================== */
 
 function startCompass() {
 
+
 if (
+
 typeof DeviceOrientationEvent !==
-"undefined" &&
-typeof DeviceOrientationEvent.requestPermission ===
+"undefined"
+
+&&
+
+typeof
+DeviceOrientationEvent
+.requestPermission ===
 "function"
+
 ) {
 
+
 DeviceOrientationEvent
+
 .requestPermission(true)
+
 .then(permission => {
 
-if (permission === "granted") {
 
-window.addEventListener(
+if (
+permission ===
+"granted"
+) {
+
+
+window
+.addEventListener(
+
 "deviceorientation",
+
 handleOrientation,
+
 true
+
 );
+
 
 status.innerText =
 "Compass enabled. Finding location…";
 
+
 getLocation();
 
-} else {
+
+}
+
+else {
+
 
 status.innerText =
 "Compass permission was denied.";
@@ -516,7 +979,10 @@ status.innerText =
 }
 
 })
+
+
 .catch(error => {
+
 
 status.innerText =
 "Compass error: " +
@@ -524,79 +990,176 @@ error;
 
 });
 
-} else {
 
-window.addEventListener(
+}
+
+else {
+
+
+window
+.addEventListener(
+
 "deviceorientationabsolute",
+
 handleOrientation,
+
 true
+
 );
 
-window.addEventListener(
+
+window
+.addEventListener(
+
 "deviceorientation",
+
 handleOrientation,
+
 true
+
 );
+
 
 getLocation();
+
 }
+
 }
 
 
-/* ---------------------------
+
+/* =====================================================
 ORIENTATION
---------------------------- */
+===================================================== */
 
 function handleOrientation(event) {
 
+
 let newHeading = null;
 
-// iPhone / Safari
-if (typeof event.webkitCompassHeading === "number") {
 
-newHeading = event.webkitCompassHeading;
+
+/*
+
+iPhone / Safari
+
+*/
+
+if (
+
+typeof
+event.webkitCompassHeading ===
+"number"
+
+) {
+
+
+newHeading =
+event.webkitCompassHeading;
 
 }
 
-// Other browsers
-else if (typeof event.alpha === "number") {
 
-newHeading = 360 - event.alpha;
+
+/*
+
+Other browsers
+
+*/
+
+else if (
+
+typeof event.alpha ===
+"number"
+
+) {
+
+
+newHeading =
+360 -
+event.alpha;
 
 }
 
-if (newHeading !== null) {
 
-heading = newHeading;
 
-// Show the heading in the centre of the screen
-document.getElementById("compass").innerText =
-Math.round(heading) + "°";
+if (
+newHeading !== null
+) {
 
-// Show the heading at the bottom too
-status.innerText =
-"Heading: " +
-Math.round(heading) +
+
+heading =
+newHeading;
+
+
+
+/*
+
+Display heading.
+
+*/
+
+document
+.getElementById("compass")
+.innerText =
+
+Math.round(
+heading
+) +
+
 "°";
 
-// Recalculate building positions
-updateBuildings();
+
+
+status.innerText =
+
+"Heading: " +
+
+Math.round(
+heading
+) +
+
+"°";
+
+
+
+/*
+
+Update on the browser's
+next screen refresh.
+
+*/
+
+requestAnimationFrame(
+updateBuildings
+);
+
 }
+
 }
 
 
 
-/* ---------------------------
-START
---------------------------- */
+/* =====================================================
+START BUTTON
+===================================================== */
 
 startButton.addEventListener(
-"click", ()=> {
-  startCompass();
-  startCamera();
-});
+
+"click",
+
+() => {
+
+startCamera();
+
+startCompass();
+
+}
+
+);
 
 </script>
 
 </body>
+
 </html>
