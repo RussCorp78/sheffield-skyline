@@ -88,7 +88,7 @@ background: rgba(0,0,0,0.75);
 color: white;
 border-radius: 8px;
 white-space: nowrap;
-font-size: 15px;
+font-size: 12px;
 font-weight: bold;
 box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
@@ -273,12 +273,110 @@ SHOW BUILDINGS
 
 function updateBuildings() {
 
-if (
-userLat === null ||
-userLon === null ||
-heading === null
-) {
-return;
+    if (
+        userLat === null ||
+        userLon === null ||
+        heading === null
+    ) {
+        return;
+    }
+
+    document
+        .querySelectorAll(".building")
+        .forEach(el => el.remove());
+
+
+    // Calculate distance and bearing for every building
+    const visibleBuildings = buildings
+        .map(building => {
+
+            const buildingDistance =
+                distance(
+                    userLat,
+                    userLon,
+                    building.lat,
+                    building.lon
+                );
+
+            const b =
+                bearing(
+                    userLat,
+                    userLon,
+                    building.lat,
+                    building.lon
+                );
+
+            let difference =
+                b - heading;
+
+            difference =
+                (difference + 540) % 360 - 180;
+
+            return {
+                ...building,
+                distance: buildingDistance,
+                bearing: b,
+                difference: difference
+            };
+
+        })
+
+        // Only keep buildings within our 120° view
+        .filter(building =>
+            Math.abs(building.difference) <= 60
+        )
+
+        // Furthest first
+        .sort((a, b) =>
+            b.distance - a.distance
+        );
+
+
+    // Draw the buildings
+    visibleBuildings.forEach(building => {
+
+        const screenX =
+            50 +
+            (building.difference / 60) * 50;
+
+
+        const marker =
+            document.createElement("div");
+
+        marker.className =
+            "building";
+
+
+        // Smaller labels for distant buildings
+        const size =
+            Math.max(
+                9,
+                Math.min(
+                    15,
+                    18 - (building.distance / 1000)
+                )
+            );
+
+        marker.style.fontSize =
+            size + "px";
+
+
+        marker.innerText =
+            building.name;
+
+
+        marker.style.left =
+            screenX + "%";
+
+        marker.style.top =
+            "45%";
+
+
+        document
+            .getElementById("sky")
+            .appendChild(marker);
+
+    });
 }
 
 document
