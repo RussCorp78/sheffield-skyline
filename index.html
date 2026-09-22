@@ -297,7 +297,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.8
+Sheffield Skyline v1.9
 </div>
 
 
@@ -336,7 +336,7 @@ let buildings = [];
       buildings = await response.json();
 
       console.log("Buildings loaded", buildings.length);
-
+      status.innerText = "Buildings loaded: " + buildings.length;
       updateBuildings()
 
     } catch (error) {
