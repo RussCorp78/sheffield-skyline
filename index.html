@@ -167,17 +167,28 @@ async function startCamera() {
     
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: { ideal: "environment" }
+        facingMode: { 
+          ideal: "environment" 
+        }
       },
       audio: false
     });
 
-    video.srcobject = stream;
+    video.srcObject = stream;
 
     await video.play();
 
+    status.innerText =
+      "Camera started";
+
     } catch (error) {
-    status.innerText = "Camera error: " + error.message;
+    
+    status.innerText = 
+      "Camera error: " + 
+      error.name +
+      " - " +
+      error.message;
+    
    console.error(error);
   }
   
