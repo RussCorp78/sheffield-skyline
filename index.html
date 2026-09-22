@@ -91,6 +91,7 @@ white-space: nowrap;
 font-size: 12px;
 font-weight: bold;
 box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 5;
 }
 
 .building::after {
@@ -123,6 +124,16 @@ transform: translateX(-50%);
   font-weight: bold;
   z-index: 15;
 }
+
+#camera {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index:0:
+}
 </style>
 </head>
 
@@ -130,6 +141,8 @@ transform: translateX(-50%);
 
 <div id="sky">
 
+<video id="camera" autoplay playsinline></video>
+  
 <div id="title">
 Sheffield Skyline
 </div>
@@ -148,6 +161,19 @@ Waiting to start…
 
 <script>
 
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: { ideal: "environment" }
+      },
+      audio: false
+    });
+    document.getElementsById("camera").srcObject = stream;
+  } catch (error) {
+    status.innerText = "Camera error: " + error.message;
+  }
+}
 const buildings = [
 
 {
@@ -546,9 +572,10 @@ START
 --------------------------- */
 
 startButton.addEventListener(
-"click",
-startCompass
-);
+"click", ()=> {
+  startCompass();
+  startCamera();
+});
 
 </script>
 
