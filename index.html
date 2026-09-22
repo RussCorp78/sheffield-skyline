@@ -297,7 +297,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.7
+Sheffield Skyline v1.8
 </div>
 
 
@@ -339,7 +339,7 @@ let buildings = [];
 
       updateBuildings()
 
-    } catch error {
+    } catch (error) {
       console.error("Could not load buildings:", error);
       status.innerText = "Could not load building data.";
     }
