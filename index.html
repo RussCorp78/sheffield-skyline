@@ -331,7 +331,7 @@ let buildings = [];
 
   async function loadBuildings() {
     try {
-      const response = await fethc("buildings.json");
+      const response = await fetch("buildings.json");
 
       buildings = await response.json();
 
