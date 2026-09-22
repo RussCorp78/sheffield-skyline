@@ -297,7 +297,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.4
+Sheffield Skyline v1.5
 </div>
 
 
@@ -621,114 +621,6 @@ size + "px";
 
 });
 }
-
-
-/* =================================================
-DRAW BUILDINGS
-================================================= */
-
-
-visibleBuildings.forEach(
-building => {
-
-
-/*
-
-Horizontal position.
-
-*/
-
-const screenX =
-
-50 +
-
-(
-building.difference /
-60
-) * 50;
-
-
-
-/*
-
-Create label.
-
-*/
-
-const marker =
-document.createElement("div");
-
-
-marker.className =
-"building";
-
-
-
-/*
-
-Smaller text
-for distant buildings.
-
-*/
-
-const size =
-
-Math.max(
-
-9,
-
-Math.min(
-
-15,
-
-18 -
-(
-building.distance /
-1000
-)
-
-)
-
-);
-
-
-
-marker.style.fontSize =
-size + "px";
-
-
-
-marker.innerText =
-building.name;
-
-
-
-marker.style.left =
-screenX + "%";
-
-
-/*
-For now all labels
-sit at roughly the
-same height.
-*/
-
-marker.style.top =
-"45%";
-
-
-
-document
-.getElementById("sky")
-.appendChild(marker);
-
-}
-
-);
-
-}
-
-
 
 /* =====================================================
 LOCATION
@@ -1065,7 +957,7 @@ document
 status.innerText = "Heading: " +
   Math.round(heading) + "°";
 
-
+updateBuildings();
 }
 
 }
