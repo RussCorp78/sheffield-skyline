@@ -297,7 +297,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.6
+Sheffield Skyline v1.7
 </div>
 
 
@@ -327,46 +327,23 @@ N
 BUILDINGS
 ===================================================== */
 
-const buildings = [
+let buildings = [];
 
-{
-name: "Sheffield Town Hall",
-lat: 53.3811,
-lon: -1.4701
-},
+  async function loadBuildings() {
+    try {
+      const response = await fethc("buildings.json");
 
-{
-name: "Hallam Primary School",
-lat: 53.3727,
-lon: -1.5434
-},
+      buildings = await response.json();
 
-{
-name: "Park Hill",
-lat: 53.3768,
-lon: -1.4555
-},
+      console.log("Buildings loaded", buildings.length);
 
-{
-name: "Arts Tower",
-lat: 53.3818,
-lon: -1.4882
-},
+      updateBuildings()
 
-{
-name: "St Paul's Place",
-lat: 53.3777,
-lon: -1.4676
-},
-
-{
-name: "Sheffield Cathedral",
-lat: 53.3831,
-lon: -1.4694
-}
-
-];
-
+    } catch error {
+      console.error("Could not load buildings:", error);
+      status.innerText = "Could not load building data.";
+    }
+  }
 
 
 /* =====================================================
@@ -667,7 +644,7 @@ status.innerText =
 "Location found. Point your phone around.";
 
 
-updateBuildings();
+loadBuildings();
 
 },
 
