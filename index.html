@@ -297,7 +297,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.2
+Sheffield Skyline v1.3
 </div>
 
 
@@ -517,141 +517,110 @@ UPDATE BUILDINGS
 
 function updateBuildings() {
 
-
-/* No position yet */
-
 if (
-
 userLat === null ||
-
 userLon === null ||
-
 heading === null
-
 ) {
-
 return;
+}
 
+buildings.forEach(building => {
+
+// Create the label once
+if (!building.marker) {
+
+building.marker =
+document.createElement("div");
+
+building.marker.className =
+"building";
+
+building.marker.innerText =
+building.name;
+
+document
+.getElementById("sky")
+.appendChild(building.marker);
 }
 
 
-
-/* Remove old labels */
-
-document
-.querySelectorAll(".building")
-.forEach(el =>
-el.remove()
-);
-
-
-
-/*
-
-Calculate information
-about every building.
-
-*/
-
-const visibleBuildings =
-
-buildings
-
-.map(building => {
-
-
+// Calculate distance
 const buildingDistance =
-
 distance(
-
 userLat,
 userLon,
-
 building.lat,
 building.lon
-
 );
 
 
-
+// Calculate bearing
 const b =
-
 bearing(
-
 userLat,
 userLon,
-
 building.lat,
 building.lon
-
 );
 
 
-
+// Difference between building direction
+// and the direction the phone is pointing
 let difference =
-
 b - heading;
 
-
-
 difference =
-
-(
-difference + 540
-) % 360 - 180;
+(difference + 540) % 360 - 180;
 
 
+// Hide buildings outside our 120° view
+if (Math.abs(difference) > 60) {
 
-return {
+building.marker.style.display =
+"none";
 
-...building,
-
-distance:
-buildingDistance,
-
-bearing:
-b,
-
-difference:
-difference
-
-};
-
-})
+return;
+}
 
 
-/*
+// Show the building
+building.marker.style.display =
+"block";
 
-Only show buildings
-within 120° field of view.
 
-*/
+// Horizontal position
+const screenX =
+50 +
+(difference / 60) * 50;
 
-.filter(building =>
 
-Math.abs(
-building.difference
-) <= 60
+building.marker.style.left =
+screenX + "%";
 
+
+// Keep the same temporary height
+building.marker.style.top =
+"45%";
+
+
+// Smaller text for distant buildings
+const size =
+Math.max(
+9,
+Math.min(
+15,
+18 -
+(buildingDistance / 1000)
 )
-
-
-/*
-
-Furthest first.
-
-Nearer buildings are
-drawn on top.
-
-*/
-
-.sort((a, b) =>
-
-b.distance -
-a.distance
-
 );
 
+
+building.marker.style.fontSize =
+size + "px";
+
+});
+}
 
 
 /* =================================================
@@ -1075,61 +1044,31 @@ typeof event.alpha ===
 ) {
 
 
-newHeading =
-360 -
-event.alpha;
+newHeading = 
+  360 - event.alpha;
 
 }
 
-
-
-if (
-newHeading !== null
-) {
-
-
-heading =
-newHeading;
-
-
+if (newHeading !== null) {
+  
+heading = newHeading;
 
 /*
-
 Display heading.
-
 */
 
 document
 .getElementById("compass")
 .innerText =
+  Math.round(heading) + "°";
 
-Math.round(
-heading
-) +
+status.innerText = "Heading: " +
+  Math.round(heading) + "°";
 
-"°";
-
-
-
-status.innerText =
-
-"Heading: " +
-
-Math.round(
-heading
-) +
-
-"°";
-
-
-
-
-
+updateBuildings();
 }
 
 }
-
-
 
 /* =====================================================
 START BUTTON
