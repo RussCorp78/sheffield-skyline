@@ -34,6 +34,13 @@
     "height": 78,
     "info": "Stuff"
   },
+   {
+    "name": "Russell Towers",
+    "lat": 51.0629,
+    "lon": -0.3104,
+    "height": 5,
+    "info": "Home of Grandma and Granddad"
+  },
   {
     "name": "Meadowhall",
     "lat": 53.4133,
