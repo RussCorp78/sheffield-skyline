@@ -29,11 +29,10 @@ background: #111;
 position: fixed;
 top: 0;
 left: 0;
-width: 100%;
-height: 100%;
+width: 100vw;
+height: 100vh;
 background: transparent;
-z-index: 1;
-pointer-events: none;
+z-index: 2;
 );
 }
 
@@ -76,7 +75,8 @@ background: white;
 color: #222;
 font-size: 17px;
 font-weight: bold;
-z-index: 30;
+z-index: 100;
+pointer-events: auto;
 }
 
 .building {
@@ -90,7 +90,7 @@ white-space: nowrap;
 font-size: 12px;
 font-weight: bold;
 box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  z-index: 5;
+z-index: 10;
 }
 
 .building::after {
@@ -131,7 +131,7 @@ transform: translateX(-50%);
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  z-index: 0;
+  z-index: 1;
   background: black;
 }
 </style>
@@ -139,7 +139,7 @@ transform: translateX(-50%);
 
 <body>
 
-<video id="camera" autoplay playsinline></video>
+<video id="camera" autoplay playsinline muted></video>
 
 <div id="sky">
   
