@@ -289,7 +289,7 @@ roughly within the
 camera's 90° field of view.
 */
 
-if (Math.abs(difference) > 45) {
+if (Math.abs(difference) > 60) {
 return;
 }
 
@@ -301,7 +301,7 @@ into screen position.
 
 const screenX =
 50 +
-(difference / 45) * 50;
+(difference / 60) * 50;
 
 
 const marker =
@@ -311,7 +311,10 @@ marker.className =
 "building";
 
 marker.innerText =
-building.name;
+building.name +
+  " | " +
+  Math.round(b) +
+  &deg;
 
 
 marker.style.left =
