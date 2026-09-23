@@ -71,17 +71,6 @@ CAMERA
   z-index: 1;
   background: black;
 }
-
-#cameraBorder {
-  postion: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: fill;
-  z-index: 40;
-  pointer-events: none;
-}
   
 /* ---------------------------
 LANDMARK INFO
@@ -330,6 +319,15 @@ transform:
 translateX(-50%);
 }
 
+#cameraBorder {
+  postion: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+}
 </style>
 
 </head>
@@ -356,6 +354,9 @@ autoplay
 playsinline
 muted>
 </video>
+
+<!-- CAMERA BORDER -->
+        
 <img id="cameraBorder" src="CameraBorder1.png" alt="">
 
 <!-- AR OVERLAY -->
@@ -364,7 +365,7 @@ muted>
 
 
 <div id="title">
-Sheffield Skyline v1.14
+Sheffield Skyline v1.15
 </div>
 
 
