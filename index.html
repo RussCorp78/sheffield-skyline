@@ -892,7 +892,8 @@ function stopCamera() {
     document
         .getElementById("compass")
         .innerText = "N";
-
+  
+    // Restore the status message
     status.style.display = "block";
     status.innerText = "Ready to start";
 }
@@ -1086,20 +1087,20 @@ updateBuildings();
 }
 
 /* =====================================================
-START & STOP BUTTON
+START & STOP BUTTONS
 ===================================================== */
 
 startButton.addEventListener(
-  "click",
-  () => {
-  startCamera();
-  startCompass();
-}
+    "click",
+    () => {
+        startCamera();
+        startCompass();
+    }
 );
 
 stopButton.addEventListener(
     "click",
-    stopCamera();
+    stopCamera
 );
   
 </script>
