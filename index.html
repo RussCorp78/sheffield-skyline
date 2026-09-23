@@ -156,6 +156,9 @@ to bottom,
 );
 }
 
+#sky.camera-active {
+  background: transparent;
+}
 
 
 /* ---------------------------
@@ -166,7 +169,7 @@ TITLE
   position: absolute;
   top: 20px;
   right: 20px;
-  text-align: centre;
+  text-align: center;
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -804,14 +807,13 @@ audio: false
 
 
 
-camera.srcObject =
-stream;
-
-
+camera.srcObject = stream;
 
 await camera.play();
 
-
+document
+    .getElementById("sky")
+    .classList.add("camera-active");
 
 status.innerText =
 "Camera started. Starting compass…";
