@@ -1,103 +1,3 @@
-/* -----------------------------------------------------
-ELEVATION
------------------------------------------------------ */
-
-/* Ground elevation of the building */
-
-const groundElevation =
-  Number(building.Elevation);
-
-
-/* Top of the building */
-
-const topElevation =
-  groundElevation +
-  Number(building.height);
-
-
-/* Height difference between us and building ground */
-
-const groundDifference =
-  groundElevation -
-  userElevation;
-
-
-/* Height difference between us and building top */
-
-const topDifference =
-  topElevation -
-  userElevation;
-
-
-/* Calculate vertical angles.
-
-Positive = above us
-Negative = below us
-*/
-
-const groundAngle =
-  Math.atan2(
-    groundDifference,
-    buildingDistance
-  ) * 180 / Math.PI;
-
-
-const topAngle =
-  Math.atan2(
-    topDifference,
-    buildingDistance
-  ) * 180 / Math.PI;
-
-
-/* -----------------------------------------------------
-VERTICAL SCREEN SCALE
------------------------------------------------------ */
-
-const pixelsPerDegree = 10;
-
-
-/* Ground position on screen */
-
-const groundY =
-  50 -
-  (groundAngle * pixelsPerDegree / 100);
-
-
-/* Top position on screen */
-
-const topY =
-  50 -
-  (topAngle * pixelsPerDegree / 100);
-
-
-/* Height of building on screen */
-
-const lineHeight =
-  Math.abs(groundY - topY) *
-  window.innerHeight /
-  100;
-
-
-/* -----------------------------------------------------
-POSITION LABEL AT BUILDING TOP
------------------------------------------------------ */
-
-building.marker.style.top =
-  topY + "%";
-
-
-/* -----------------------------------------------------
-POSITION BUILDING LINE
------------------------------------------------------ */
-
-const line =
-  building.marker.querySelector(
-    ".building-line"
-  );
-
-line.style.height =
-  lineHeight + "px";
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -388,7 +288,7 @@ BUILDING LABEL
   bottom: 0;
   height: 100px;
   pointer-events: none;
-  z-index: -1;
+  z-index: 1;
 }
   
 .building {
@@ -758,83 +658,105 @@ const screenX =
 building.marker.style.left =
 screenX + "%";
 
-/* ------------------------------------------------------------------------------------
+/* -----------------------------------------------------
 ELEVATION
---------------------------------------------------------------------------------------*/
+----------------------------------------------------- */
 
-  /* Ground elevation of the building */
+/* Ground elevation of the building */
 
-  const groundElevation =
-    Number(building.Elevation);
+const groundElevation =
+  Number(building.Elevation);
 
-  /* Top of the building */
 
-  const topElevation =
-    groundElevation +
-    Number(building.height);
+/* Top of the building */
 
-  /* Height difference between us and building */
+const topElevation =
+  groundElevation +
+  Number(building.height);
 
-  const topDIfference =
-    topElevation -
-    userElevation;
 
-  /* Calculate vertical angles.
-  Postive = above us
-  Negative = below us
-  */
+/* Height difference between us and building ground */
 
-  const groundAngle =
-    Math.atan2(
-      groundDifference,
-      buildingDifference
-      ) * 180 / Math.PI;
+const groundDifference =
+  groundElevation -
+  userElevation;
 
-  const topAngle =
-    Math.atan2(
-      topDifference,
-      buildingDistance
-      ) * 180 / Math.PI;
 
-  /* ---------------------------------------------------
-  Vertical Screen Scale
-  ----------------------------------------------------*/
+/* Height difference between us and building top */
 
-  /* For now the center of the screen represents the horizon
-  10 pixels per degree is the starting scale
-  */
+const topDifference =
+  topElevation -
+  userElevation;
 
-  const pixelsPerDegree = 10;
 
-  /* 
-  Ground position on screen
-  */
+/* Calculate vertical angles.
 
-  const groundY = 50 - (groundAngle * pixelsPerDegree / 100);
+Positive = above us
+Negative = below us
+*/
 
-  /* Top position on screen */
+const groundAngle =
+  Math.atan2(
+    groundDifference,
+    buildingDistance
+  ) * 180 / Math.PI;
 
-  const topY = 50 - (topAngle * pixelsPerDegree / 100);
 
-  /* Height of the building on screen */
+const topAngle =
+  Math.atan2(
+    topDifference,
+    buildingDistance
+  ) * 180 / Math.PI;
 
-  const lineHeight = Maths.abs(groundY - topY) * window.innerHeight / 100;
 
-  /*------------------------------------------------------------
-  POSITION LABEL AT BUILDING TOP
-  ------------------------------------------------------------*/
+/* -----------------------------------------------------
+VERTICAL SCREEN SCALE
+----------------------------------------------------- */
 
-  building.marker.style.top =
-    topY + "%";
+const pixelsPerDegree = 10;
 
-  /*
-  Make sure the line extends from the buidling ground to its top
-  Because the marker is positioned at the building top, the line extends downwards from there
-  */
 
-  const line = building.marker.querySelector(".building-line");
+/* Ground position on screen */
 
-  line.style.height = lineHeight + "px";
+const groundY =
+  50 -
+  (groundAngle * pixelsPerDegree / 100);
+
+
+/* Top position on screen */
+
+const topY =
+  50 -
+  (topAngle * pixelsPerDegree / 100);
+
+
+/* Height of building on screen */
+
+const lineHeight =
+  Math.abs(groundY - topY) *
+  window.innerHeight /
+  100;
+
+
+/* -----------------------------------------------------
+POSITION LABEL AT BUILDING TOP
+----------------------------------------------------- */
+
+building.marker.style.top =
+  topY + "%";
+
+
+/* -----------------------------------------------------
+POSITION BUILDING LINE
+----------------------------------------------------- */
+
+const line =
+  building.marker.querySelector(
+    ".building-line"
+  );
+
+line.style.height =
+  lineHeight + "px";
 
 // Smaller text for distant buildings
 const size =
@@ -891,13 +813,13 @@ userElevation = position.coords.altitude;
 
 status.innerText =
 "Elevation: " +
-  math.round(userElevation) +
+  Math.round(userElevation) +
   "m";
 
 
 loadBuildings();
 
-status.style.display = "none";
+status.style.display = "block";
 
 },
 
