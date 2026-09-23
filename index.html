@@ -279,63 +279,31 @@ z-index: 15;
 /* ---------------------------
 BUILDING LABEL
 --------------------------- */
-
+.building-line {
+  position: absolute;
+  width: 3px;
+  background: white;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  height: 100px;
+  pointer-events: none;
+  z-index: -1;
+}
+  
 .building {
-
-position: absolute;
-
-transform:
-translate(-50%, -50%);
-
-padding:
-7px 10px;
-
-background:
-rgba(0,0,0,0.75);
-
-color: white;
-
-border-radius: 8px;
-
-white-space: nowrap;
-
-font-size: 12px;
-
-font-weight: bold;
-
-box-shadow:
-0 2px 8px
-rgba(0,0,0,0.4);
-
-z-index: 10;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 7px 10px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 10;
 }
-
-
-/* ---------------------------
-BUILDING DOT
---------------------------- */
-
-.building::after {
-
-content: "";
-
-position: absolute;
-
-width: 8px;
-height: 8px;
-
-background: white;
-
-border-radius: 50%;
-
-bottom: -14px;
-
-left: 50%;
-
-transform:
-translateX(-50%);
-}
-
 
 </style>
 
@@ -429,34 +397,19 @@ VARIABLES
 ===================================================== */
 
 let userLat = null;
-
 let userLon = null;
-
+let userElevation = null;
 let heading = null;
 
-
-
-const status =
-document.getElementById("status");
-
-const startButton =
-document.getElementById("start");
-
-const stopButton =
-document.getElementById("stop");
-  
-const camera =
-document.getElementById("camera");
-const landmarkInfo =
-document.getElementById("landmarkInfo");
-const infoName =
-document.getElementById("infoName");
-const infoHeight =
-document.getElementById("infoHeight");
-const infoText =
-document.getElementById("infoText");
-const closeInfo =
-document.getElementById("closeInfo");
+const status = document.getElementById("status");
+const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const camera = document.getElementById("camera");
+const landmarkInfo = document.getElementById("landmarkInfo");
+const infoName = document.getElementById("infoName");
+const infoHeight = document.getElementById("infoHeight");
+const infoText = document.getElementById("infoText");
+const closeInfo = document.getElementById("closeInfo");
 
 function showLandmarkInfo(building) {
 infoName.innerText =
@@ -606,6 +559,7 @@ function updateBuildings() {
 if (
 userLat === null ||
 userLon === null ||
+userElevation === null ||
 heading === null
 ) {
 return;
@@ -613,7 +567,8 @@ return;
 
 buildings.forEach(building => {
 
-// Create the label once
+// Create the building marker 
+
 if (!building.marker) {
 
 building.marker =
@@ -622,8 +577,28 @@ document.createElement("div");
 building.marker.className =
 "building";
 
-building.marker.innerText =
-building.name;
+/* Building line */
+  
+const line =
+  document.createElement("div");
+
+line.className =
+  "building-line";
+
+building.marker.appendChild(line);
+
+  /* Building name */
+
+const label =
+  document.createElement("span");
+
+label.innerText =
+  building.name;
+
+building.marker.appendChild(label);
+
+/* Click information */
+  
 building.marker.addEventListener(
 "click",
 () => {
@@ -656,9 +631,8 @@ building.lat,
 building.lon
 );
 
+/* Horizontal difference */
 
-// Difference between building direction
-// and the direction the phone is pointing
 let difference =
 b - heading;
 
@@ -675,12 +649,6 @@ building.marker.style.display =
 return;
 }
 
-
-// Show the building
-building.marker.style.display =
-"block";
-
-
 // Horizontal position
 const screenX =
 50 +
@@ -690,11 +658,83 @@ const screenX =
 building.marker.style.left =
 screenX + "%";
 
+/* ------------------------------------------------------------------------------------
+ELEVATION
+--------------------------------------------------------------------------------------*/
 
-// Different position based on heights
-  const screenY =
-   100 - (building.height * 8);
-building.marker.style.top = screenY + "%";
+  /* Ground elevation of the building */
+
+  const groundElevation =
+    Number(building.Elevation);
+
+  /* Top of the building */
+
+  const topElevation =
+    groundElevation +
+    Number(building.height);
+
+  /* Height difference between us and building */
+
+  const topDIfference =
+    topElevation -
+    userElevation;
+
+  /* Calculate vertical angles.
+  Postive = above us
+  Negative = below us
+  */
+
+  const groundAngle =
+    Math.atan2(
+      groundDifference,
+      buildingDifference
+      ) * 180 / Math.PI;
+
+  const topAngle =
+    Math.atan2(
+      topDifference,
+      buildingDistance
+      ) * 180 / Math.PI;
+
+  /* ---------------------------------------------------
+  Vertical Screen Scale
+  ----------------------------------------------------*/
+
+  /* For now the center of the screen represents the horizon
+  10 pixels per degree is the starting scale
+  */
+
+  const pixelsPerDegree = 10;
+
+  /* 
+  Ground position on screen
+  */
+
+  const groundY = 50 - (groundAngle * pixelsPerDegree / 100);
+
+  /* Top position on screen */
+
+  const topY = 50 - (topAngle * pixelsPerDegree / 100);
+
+  /* Height of the building on screen */
+
+  const lineHeight = Maths.abs(groundY - topY) * window.innerHeight / 100;
+
+  /*------------------------------------------------------------
+  POSITION LABEL AT BUILDING TOP
+  ------------------------------------------------------------*/
+
+  building.marker.style.top =
+    topY + "%";
+
+  /*
+  Make sure the line extends from the buidling ground to its top
+  Because the marker is positioned at the building top, the line extends downwards from there
+  */
+
+  const line = building.marker.querySelector(".building-line");
+
+  line.style.height = lineHeight + "px";
 
 // Smaller text for distant buildings
 const size =
@@ -745,18 +785,14 @@ navigator
 
 position => {
 
-
-userLat =
-position.coords.latitude;
-
-
-userLon =
-position.coords.longitude;
-
-
+userLat = position.coords.latitude;
+userLon = position.coords.longitude;
+userElevation = position.coords.altitude;
 
 status.innerText =
-"Location found. Point your phone around.";
+"Elevation: " +
+  math.round(userElevation) +
+  "m";
 
 
 loadBuildings();
@@ -859,6 +895,7 @@ function stopCamera() {
     heading = null;
     userLat = null;
     userLon = null;
+    userElevation = null;
   
     // Stop every track belonging to the camera stream
     if (camera.srcObject) {
