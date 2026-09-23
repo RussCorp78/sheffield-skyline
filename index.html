@@ -293,7 +293,7 @@ BUILDING LABEL
   
 .building {
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -100%);
   padding: 7px 10px;
   background: rgba(0,0,0,0.75);
   color: white;
@@ -689,11 +689,7 @@ const topDifference =
   userElevation;
 
 
-/* Calculate vertical angles.
-
-Positive = above us
-Negative = below us
-*/
+/* Calculate vertical angles */
 
 const groundAngle =
   Math.atan2(
@@ -713,30 +709,30 @@ const topAngle =
 VERTICAL SCREEN SCALE
 ----------------------------------------------------- */
 
-const pixelsPerDegree = 10;
+const verticalScale = 3;
 
 
 /* Ground position on screen */
 
 const groundY =
   50 -
-  (groundAngle * pixelsPerDegree / 100);
+  (groundAngle * verticalScale);
 
 
 /* Top position on screen */
 
 const topY =
   50 -
-  (topAngle * pixelsPerDegree / 100);
+  (topAngle * verticalScale);
 
 
-/* Height of building on screen */
+/* Height of building on screen 
 
 const lineHeight =
   Math.abs(groundY - topY) *
   window.innerHeight /
   100;
-
+*/
 
 /* -----------------------------------------------------
 POSITION LABEL AT BUILDING TOP
@@ -755,6 +751,11 @@ const line =
     ".building-line"
   );
 
+const lineHeight =
+  Math.abs(groundY - topY) *
+  window.innerHeight /
+  100;
+  
 line.style.height =
   lineHeight + "px";
 
