@@ -281,11 +281,12 @@ BUILDING LABEL
 
  .building-line {
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   width: 6px;
   background: red;
   transform: translateX(-50%);
+  transform-origin: bottom;
   height: 0;
   pointer-events: none;
   z-index: 1;
@@ -846,9 +847,7 @@ const label =
     building.marker
         .querySelector(".building-label");
 
-label.style.bottom =
-    lineHeight + "px";
-
+label.style.bottom = "0";
   
 /* -----------------------------------------------------
 POSITION LABEL AT BUILDING TOP
