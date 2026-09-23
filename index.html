@@ -181,7 +181,7 @@ TITLE
 
 
 /* ---------------------------
-START BUTTON
+START & STOP BUTTONS
 --------------------------- */
 
 #start {
@@ -201,7 +201,21 @@ START BUTTON
   z-index: 100;
   pointer-events: auto;
 }
+  
+#stop {
+    position: absolute;
+    top: 70px;
+    right: 20px;
 
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+
+    background: rgba(0,0,0,0.7);
+    color: white;
+
+    z-index: 100;
+}
 
 /* ---------------------------
 STATUS
@@ -360,7 +374,11 @@ Sheffield Skyline
 <button id="start">
 Start Compass
 </button>
-
+  
+<button id="stop" style="display:none;">
+    Exit Camera
+</button>
+  
 <div id="status">
 Waiting to start…
 </div>
@@ -424,6 +442,9 @@ document.getElementById("status");
 const startButton =
 document.getElementById("start");
 
+const stopButton =
+document.getElementById("stop");
+  
 const camera =
 document.getElementById("camera");
 const landmarkInfo =
@@ -809,13 +830,58 @@ audio: false
 
 });
 
+function stopCamera() {
 
+    // Stop all camera tracks
+    if (camera.srcObject) {
+
+        camera.srcObject
+            .getTracks()
+            .forEach(track => track.stop());
+
+        camera.srcObject = null;
+    }
+
+    // Hide camera
+    camera.style.display = "none";
+
+    // Restore holding screen
+    document
+        .getElementById("sky")
+        .style.background =
+        `linear-gradient(
+            to bottom,
+            #87ceeb 0%,
+            #dff3ff 65%,
+            #9ca58d 65%,
+            #59634e 100%
+          )
+        .querySelectorAll(".building")
+        .forEach(marker => marker.style.display = "none");  
+
+    // Show Start button again
+    startButton.style.display = "block";
+
+    // Hide Stop button
+    stopButton.style.display = "none";
+
+    status.innerText =
+        "Ready to start";
+}
+  
 camera.style.display = "block";
   
 camera.srcObject = stream;
 
 await camera.play();
+document
+    .getElementById("sky")
+    .style.background = "transparent";
 
+camera.style.display = "block";
+
+stopButton.style.display = "block";
+  
 document
     .getElementById("sky")
     .classList.add("camera-active");
@@ -1035,23 +1101,22 @@ updateBuildings();
 }
 
 /* =====================================================
-START BUTTON
+START & STOP BUTTON
 ===================================================== */
 
 startButton.addEventListener(
-
-"click",
-
-() => {
-
-startCamera();
-
-startCompass();
-
+  "click",
+  () => {
+  startCamera();
+  startCompass();
 }
-
 );
 
+stopButton.addEventListener(
+    "click",
+    stopCamera();
+);
+  
 </script>
       </main>
     </div>
