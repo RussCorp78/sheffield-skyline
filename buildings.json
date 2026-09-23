@@ -3,21 +3,21 @@
     "name": "Sheffield Town Hall",
     "lat": 53.3811,
     "lon": -1.4701,
-    "height": 78,
+    "height": 5,
     "info": "Stuff"
   },
   {
     "name": "Stannington Tower",
     "lat": 53.3925,
     "lon": -1.5304,
-    "height": 78,
+    "height": 10,
     "info": "Stuff"
   },
   {
     "name": "Three Merry Lads",
     "lat": 53.3718,
     "lon": -1.5806,
-    "height": 10,
+    "height": 3,
     "info": "Stuff"
   },
   {
@@ -31,21 +31,21 @@
     "name": "Queen Elizabeth Tower",
     "lat": 53.3436,
     "lon": -1.4393,
-    "height": 78,
+    "height": 10,
     "info": "Stuff"
   },
    {
     "name": "Russell Towers",
     "lat": 51.0629,
     "lon": -0.3104,
-    "height": 5,
+    "height": 1,
     "info": "Home of Grandma and Granddad"
   },
   {
     "name": "Meadowhall",
     "lat": 53.4133,
     "lon": -1.4133,
-    "height": 78,
+    "height": 5,
     "info": "Stuff"
   }
 ]
