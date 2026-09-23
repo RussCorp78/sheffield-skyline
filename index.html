@@ -803,36 +803,60 @@ CAMERA
 
 async function startCamera() {
 
+    try {
 
-try {
+        status.style.display = "block";
+        status.innerText = "Starting camera…";
 
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: {
+                        ideal: "environment"
+                    }
+                },
+                audio: false
+            });
 
-status.innerText =
-"Starting camera…";
+        camera.srcObject = stream;
+        camera.style.display = "block";
 
+        await camera.play();
 
-const stream =
+        // Remove the holding-screen background
+        document
+            .getElementById("sky")
+            .classList.add("camera-active");
 
-await navigator
-.mediaDevices
-.getUserMedia({
+        // Switch the buttons
+        startButton.style.display = "none";
+        stopButton.style.display = "block";
 
-video: {
+        status.innerText =
+            "Camera started. Starting compass…";
 
-facingMode: {
-ideal:
-"environment"
+    } catch (error) {
+
+        status.style.display = "block";
+
+        status.innerText =
+            "Camera error: " +
+            error.name +
+            " - " +
+            error.message;
+
+        console.error(error);
+    }
 }
 
-},
 
-audio: false
-
-});
+/* =====================================================
+STOP CAMERA
+===================================================== */
 
 function stopCamera() {
 
-    // Stop all camera tracks
+    // Stop every track belonging to the camera stream
     if (camera.srcObject) {
 
         camera.srcObject
@@ -842,74 +866,35 @@ function stopCamera() {
         camera.srcObject = null;
     }
 
-    // Hide camera
+    // Hide the video
     camera.style.display = "none";
 
-    // Restore holding screen
+    // Restore the sky and ground holding screen
     document
         .getElementById("sky")
-        .style.background =
-        `linear-gradient(
-            to bottom,
-            #87ceeb 0%,
-            #dff3ff 65%,
-            #9ca58d 65%,
-            #59634e 100%
-          )
+        .classList.remove("camera-active");
+
+    // Hide all building markers
+    document
         .querySelectorAll(".building")
-        .forEach(marker => marker.style.display = "none");  
+        .forEach(marker => {
+            marker.style.display = "none";
+        });
 
-    // Show Start button again
+    // Close the landmark information panel if open
+    landmarkInfo.style.display = "none";
+
+    // Restore the buttons
     startButton.style.display = "block";
-
-    // Hide Stop button
     stopButton.style.display = "none";
 
-    status.innerText =
-        "Ready to start";
-}
-  
-camera.style.display = "block";
-  
-camera.srcObject = stream;
+    // Reset the compass display
+    document
+        .getElementById("compass")
+        .innerText = "N";
 
-await camera.play();
-document
-    .getElementById("sky")
-    .style.background = "transparent";
-
-camera.style.display = "block";
-
-stopButton.style.display = "block";
-  
-document
-    .getElementById("sky")
-    .classList.add("camera-active");
-
-status.innerText =
-"Camera started. Starting compass…";
-
-
-}
-
-catch (error) {
-
-
-status.innerText =
-
-"Camera error: " +
-
-error.name +
-
-" - " +
-
-error.message;
-
-
-console.error(error);
-
-}
-
+    status.style.display = "block";
+    status.innerText = "Ready to start";
 }
 
 
