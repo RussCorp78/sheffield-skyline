@@ -281,12 +281,12 @@ BUILDING LABEL
 --------------------------- */
 .building-line {
   position: absolute;
-  width: 4px;
-  background: white;
+  top: 100%;
   left: 50%;
+  width: 6px;
+  background: red;
   transform: translateX(-50%);
-  bottom: 0;
-  height: 100px;
+  height: 0;
   pointer-events: none;
   z-index: 1;
 }
@@ -648,7 +648,7 @@ building.marker.style.display =
 
 return;
 } else {
-  building.marker.style.dislay = "block";
+  building.marker.style.display = "block";
 }
 
 // Horizontal position
