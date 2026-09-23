@@ -85,6 +85,7 @@ CAMERA
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: none;
 }
 
 .app-frame::before {
@@ -169,6 +170,7 @@ TITLE
   position: absolute;
   top: 20px;
   right: 20px;
+  left: 20px;
   text-align: center;
   color: white;
   font-size: 24px;
@@ -806,7 +808,8 @@ audio: false
 });
 
 
-
+camera.style.display = "block";
+  
 camera.srcObject = stream;
 
 await camera.play();
