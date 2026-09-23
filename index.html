@@ -387,7 +387,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline x
+Sheffield Skyline t
 </div>
 
 <button id="start">
@@ -774,7 +774,13 @@ const groundY =
   60 - (groundElevation * 0.2);
 
 const lineHeight =
-  building.height * 0.75;
+    Math.max(
+        25,
+        Math.min(
+            180,
+            Number(building.height) * 1.5
+        )
+    );
 
 
 /* Top position on screen */
