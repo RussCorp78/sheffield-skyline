@@ -278,8 +278,8 @@ z-index: 15;
 
 /* ---------------------------
 BUILDING LABEL
---------------------------- */
-.building-line {
+
+ .building-line {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -290,8 +290,7 @@ BUILDING LABEL
   pointer-events: none;
   z-index: 1;
 }
-  
-.building {
+  .building {
   position: absolute;
   transform: translate(-50%, -100%);
   padding: 7px 10px;
@@ -304,7 +303,59 @@ BUILDING LABEL
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   z-index: 10;
 }
+--------------------------- */
 
+/* Invisible anchor positioned at the building's ground level */
+.building {
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    /* Centre horizontally, but do not move vertically */
+    transform: translateX(-50%);
+
+    overflow: visible;
+    z-index: 10;
+}
+
+/* Line runs upwards from ground level to building top */
+.building-line {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+
+    width: 5px;
+    height: 0;
+
+    background: red;
+    box-shadow: 0 0 3px black;
+
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Building name sits immediately above the line
+.building-label {
+    position: absolute;
+    left: 50%;
+
+    padding: 7px 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+
+    border-radius: 8px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+
+    transform: translate(-50%, -100%);
+    z-index: 2;
+}
+
+  
 </style>
 
 </head>
@@ -590,10 +641,13 @@ building.marker.appendChild(line);
   /* Building name */
 
 const label =
-  document.createElement("span");
+    document.createElement("span");
+
+label.className =
+    "building-label";
 
 label.innerText =
-  building.name;
+    building.name;
 
 building.marker.appendChild(label);
 
@@ -737,12 +791,60 @@ const lineHeight =
 */
 
 /* -----------------------------------------------------
-POSITION LABEL AT BUILDING TOP
+POSITION MARKER AT BUILDING GROUND
 ----------------------------------------------------- */
 
 building.marker.style.top =
-  topY + "%";
+    groundY + "%";
 
+
+/* -----------------------------------------------------
+CALCULATE BUILDING HEIGHT ON SCREEN
+----------------------------------------------------- */
+
+const skyHeight =
+    document
+        .getElementById("sky")
+        .clientHeight;
+
+const lineHeight =
+    Math.abs(groundY - topY) *
+    skyHeight /
+    100;
+
+
+/* -----------------------------------------------------
+POSITION BUILDING LINE
+----------------------------------------------------- */
+
+const line =
+    building.marker
+        .querySelector(".building-line");
+
+line.style.height =
+    lineHeight + "px";
+
+
+/* -----------------------------------------------------
+POSITION LABEL ABOVE BUILDING LINE
+----------------------------------------------------- */
+
+const label =
+    building.marker
+        .querySelector(".building-label");
+
+label.style.bottom =
+    lineHeight + "px";
+
+  
+/* -----------------------------------------------------
+POSITION LABEL AT BUILDING TOP
+
+
+building.marker.style.top =
+  topY + "%";
+  
+----------------------------------------------------- */
 
 /* -----------------------------------------------------
 POSITION BUILDING LINE
