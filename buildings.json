@@ -3,7 +3,7 @@
     "name": "Sheffield Town Hall",
     "lat": 53.3811,
     "lon": -1.4701,
-    "height": 5,
+    "height": 61,
     "Elevation": 87,
     "info": "Stuff"
   },
@@ -11,7 +11,7 @@
     "name": "Stannington Tower",
     "lat": 53.3925,
     "lon": -1.5304,
-    "height": 10,
+    "height": 41,
     "Elevation": 173,
     "info": "Stuff"
   },
@@ -19,7 +19,7 @@
     "name": "Three Merry Lads",
     "lat": 53.3718,
     "lon": -1.5806,
-    "height": 3,
+    "height": 9,
     "Elevation": 290,
     "info": "Stuff"
   },
@@ -27,7 +27,7 @@
     "name": "Dore Railway Station",
     "lat": 53.3276,
     "lon": -1.5155,
-    "height": 3,
+    "height": 12,
     "Elevation": 124,
     "info": "Stuff"
   },
@@ -35,7 +35,7 @@
     "name": "Queen Elizabeth Tower",
     "lat": 53.3436,
     "lon": -1.4393,
-    "height": 10,
+    "height": 38,
     "Elevation": 209,
     "info": "Stuff"
   },
@@ -43,7 +43,7 @@
     "name": "Russell Towers",
     "lat": 51.0629,
     "lon": -0.3104,
-    "height": 3,
+    "height": 6,
     "Elevation": 59,
     "info": "Home of Grandma and Granddad"
   },
@@ -51,7 +51,7 @@
     "name": "Meadowhall",
     "lat": 53.4133,
     "lon": -1.4133,
-    "height": 5,
+    "height": 30,
     "Elevation": 40,
     "info": "Stuff"
   }
