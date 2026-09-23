@@ -856,6 +856,10 @@ STOP CAMERA
 
 function stopCamera() {
 
+    heading = null;
+    userLat = null;
+    userLon = null;
+  
     // Stop every track belonging to the camera stream
     if (camera.srcObject) {
 
@@ -877,7 +881,8 @@ function stopCamera() {
     // Hide all building markers
     document
         .querySelectorAll(".building")
-        .forEach(marker => marker.remove());
+        .forEach(marker => { marker.remove();
+         });
 
     buildings.forEach(building => {
     building.marker = null;
