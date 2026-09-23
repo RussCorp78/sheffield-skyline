@@ -672,7 +672,7 @@ screenX + "%";
 
 // Different position based on heights
   const screenY =
-    50 - (building.height * 2);
+    50 - (building.height - 5) * 2));
 building.marker.style.top = screenY + "%";
 
 // Smaller text for distant buildings
@@ -687,9 +687,8 @@ Math.min(
 );
 
 
-/* building.marker.style.fontSize =
+building.marker.style.fontSize =
 size + "px";
-*/
   
 });
 }
