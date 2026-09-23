@@ -387,7 +387,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline v
+Sheffield Skyline x
 </div>
 
 <button id="start">
@@ -771,8 +771,10 @@ const verticalScale = 3;
 /* Ground position on screen */
 
 const groundY =
-  50 -
-  (groundAngle * verticalScale);
+  60 - (groundElevation * 0.2);
+
+const lineHeight =
+  building.height * 0.75;
 
 
 /* Top position on screen */
@@ -783,11 +785,19 @@ const topY =
 
 
 /* Height of building on screen 
-
+const groundY =
+  50 -
+  (groundAngle * verticalScale);
+  
 const lineHeight =
   Math.abs(groundY - topY) *
   window.innerHeight /
   100;
+
+  const lineHeight =
+    Math.abs(groundY - topY) *
+    skyHeight /
+    100;
 */
 
 /* -----------------------------------------------------
@@ -807,10 +817,7 @@ const skyHeight =
         .getElementById("sky")
         .clientHeight;
 
-const lineHeight =
-    Math.abs(groundY - topY) *
-    skyHeight /
-    100;
+
 
 
 /* -----------------------------------------------------
