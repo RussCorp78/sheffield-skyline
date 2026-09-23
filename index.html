@@ -60,43 +60,29 @@ background: #111;
 /* ---------------------------
 CAMERA
 --------------------------- */
+ 
+#camera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  background: black;
+}
 
-.camera-frame {
-    width: 300px;
-    aspect-ratio: 279 / 541; /* adjust to your image ratio */
-
-    -webkit-mask-image: url('CameraBorder.png');
-    mask-image: url('CameraBorder.png');
-
-    -webkit-mask-size: contain;
-    mask-size: contain;
-
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    -webkit-mask-position: center;
-    mask-position: center;
-
-    overflow: hidden;
+#cameraBorder {
+  postion: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: fill;
+  z-index: 40;
+  pointer-events: none;
 }
   
-#camera {
-
-position: fixed;
-
-top: 0;
-left: 0;
-
-width: 100vw;
-height: 100vh;
-
-object-fit: cover;
-
-z-index: 1;
-
-background: black;
-}
-
 /* ---------------------------
 LANDMARK INFO
 --------------------------- */
@@ -132,29 +118,6 @@ border-radius: 18px;
 background: white;
 color: #222;
 font-weight: bold;
-}
-
-#screenBorder {
-position: fixed;
-inset: 12px;
-border: 2px solid rgba(255,255,255,0.8);
-border-radius: 28px;
-z-index: 30;
-pointer-events: none;
-}
-
-/* Create extra space for the logo in the top-left */
-#screenBorder::before {
-content: "";
-position: absolute;
-top: -3px;
-left: -3px;
-width: 115px;
-height: 65px;
-background: transparent;
-border-top: none;
-border-left: none;
-border-radius: 0 0 28px 0;
 }
   
 /* ---------------------------
@@ -377,8 +340,8 @@ translateX(-50%);
   <div class="app-frame">
 
     <div class="logo logo-top-right">
-      <img src="logo.pnc" alt="Logo">
-    </div>div>
+      <img src="logo.png" alt="Logo">
+    </div>
 
     <div class="logo logo-bottom-left">
       <img src="logo.png" alt="Logo">
@@ -393,7 +356,7 @@ autoplay
 playsinline
 muted>
 </video>
-
+<img id="cameraBorder" src="CameraBorder.png" alt="">
 
 <!-- AR OVERLAY -->
 
