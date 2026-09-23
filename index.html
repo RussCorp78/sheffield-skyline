@@ -877,10 +877,12 @@ function stopCamera() {
     // Hide all building markers
     document
         .querySelectorAll(".building")
-        .forEach(marker => {
-            marker.style.display = "none";
-        });
+        .forEach(marker => marker.remove());
 
+    buildings.forEach(building => {
+    building.marker = null;
+      });
+  
     // Close the landmark information panel if open
     landmarkInfo.style.display = "none";
 
