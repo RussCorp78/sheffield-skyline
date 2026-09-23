@@ -1,3 +1,103 @@
+/* -----------------------------------------------------
+ELEVATION
+----------------------------------------------------- */
+
+/* Ground elevation of the building */
+
+const groundElevation =
+  Number(building.Elevation);
+
+
+/* Top of the building */
+
+const topElevation =
+  groundElevation +
+  Number(building.height);
+
+
+/* Height difference between us and building ground */
+
+const groundDifference =
+  groundElevation -
+  userElevation;
+
+
+/* Height difference between us and building top */
+
+const topDifference =
+  topElevation -
+  userElevation;
+
+
+/* Calculate vertical angles.
+
+Positive = above us
+Negative = below us
+*/
+
+const groundAngle =
+  Math.atan2(
+    groundDifference,
+    buildingDistance
+  ) * 180 / Math.PI;
+
+
+const topAngle =
+  Math.atan2(
+    topDifference,
+    buildingDistance
+  ) * 180 / Math.PI;
+
+
+/* -----------------------------------------------------
+VERTICAL SCREEN SCALE
+----------------------------------------------------- */
+
+const pixelsPerDegree = 10;
+
+
+/* Ground position on screen */
+
+const groundY =
+  50 -
+  (groundAngle * pixelsPerDegree / 100);
+
+
+/* Top position on screen */
+
+const topY =
+  50 -
+  (topAngle * pixelsPerDegree / 100);
+
+
+/* Height of building on screen */
+
+const lineHeight =
+  Math.abs(groundY - topY) *
+  window.innerHeight /
+  100;
+
+
+/* -----------------------------------------------------
+POSITION LABEL AT BUILDING TOP
+----------------------------------------------------- */
+
+building.marker.style.top =
+  topY + "%";
+
+
+/* -----------------------------------------------------
+POSITION BUILDING LINE
+----------------------------------------------------- */
+
+const line =
+  building.marker.querySelector(
+    ".building-line"
+  );
+
+line.style.height =
+  lineHeight + "px";
+
 <!DOCTYPE html>
 <html lang="en">
 
