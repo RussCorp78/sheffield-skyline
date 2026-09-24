@@ -733,11 +733,15 @@ const topElevation =
   Number(building.height);
 
 
-/* Height difference between us and building ground */
-
+/* Height difference between us and building ground 
 const groundDifference =
-  groundElevation -
-  userElevation;
+    groundElevation - userElevation;
+*/
+  
+/* using instead of difference between us and building ground */
+  
+const groundDifference =
+  groundElevation;
 
 
 /* Height difference between us and building top */
