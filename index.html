@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline d
+Sheffield Skyline e
 </div>
 
 <button id="start">
@@ -1162,7 +1162,9 @@ async function startCamera() {
         camera.style.display = "block";
 
         await camera.play();
-
+      
+        status.style.display = "none";
+      
         // Remove the holding-screen background
         document
             .getElementById("sky")
