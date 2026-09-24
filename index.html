@@ -275,6 +275,14 @@ font-weight: bold;
 z-index: 15;
 }
 
+#arLayer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    transform-origin: center center;
+}  
+  
 #seaLevel {
     position: absolute;
     left: 0;
@@ -403,7 +411,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline j
+Sheffield Skyline k
 </div>
 
 <button id="start">
@@ -421,9 +429,12 @@ Waiting to start…
 <div id="compass">
 N
 </div>
+
+<div id="arLayer">  
+  <div id="terrainOverlay"></div>
+  <div id="seaLevel"></div>
   
-<div id="seaLevel"></div>
-<div id="terrainOverlay"></div>
+</div> 
   
 <div id="landmarkInfo">
 <h2 id="infoName"></h2>
@@ -653,8 +664,8 @@ const seaLevelY =
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
   
-document.getElementById("seaLevel").style.transform =
-    `rotate(${phoneRoll * 0.5}deg)`;
+document.getElementById("arLayer").style.transform =
+    `rotate(${phoneRoll * 0.3}deg)`;
   
 const seaLevelPercent =
     Math.max(
@@ -676,7 +687,7 @@ const seaLevelPercent =
     )`;
   
   document.getElementById("terrainOverlay").style.transform =
-    `rotate(${phoneRoll * 0.5}deg)`;
+    `rotate(${phoneRoll * 0.3}deg)`;
   
 if (
 userLat === null ||
@@ -732,7 +743,7 @@ showLandmarkInfo(building);
 );
   
 document
-.getElementById("sky")
+.getElementById("arLayer")
 .appendChild(building.marker);
 }
 
