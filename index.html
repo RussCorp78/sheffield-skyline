@@ -388,7 +388,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline c
+Sheffield Skyline d
 </div>
 
 <button id="start">
@@ -452,6 +452,7 @@ let userLat = null;
 let userLon = null;
 let userElevation = null;
 let heading = null;
+let phonePitch = 0;
 
 const status = document.getElementById("status");
 const startButton = document.getElementById("start");
@@ -1251,15 +1252,17 @@ else if (
 
 typeof event.alpha ===
 "number"
-
 ) {
-
 
 newHeading = 
   360 - event.alpha;
-
 }
-
+  
+/* up/down angle */
+  if (typeof event.beta === "number") {
+    phonePitch = 90 - event.beta;
+}
+  
 if (newHeading !== null) {
   
 heading = newHeading;
