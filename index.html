@@ -388,7 +388,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline d
+Sheffield Skyline e
 </div>
 
 <button id="start">
@@ -1267,19 +1267,26 @@ if (newHeading !== null) {
   
 heading = newHeading;
 
-/*
-Display heading.
-*/
+/* Display heading in compass circle */
 
 document
 .getElementById("compass")
 .innerText =
   Math.round(heading) + "°";
 
+/* show updated elevation and pitch in status bar */
+status.innerText =
+    "Elev: " +
+    Math.round(userElevation) +
+    "m | Pitch: " +
+    Math.round(phonePitch) +
+    "°";
+  
 /* Add Heading in the status bar at the bottom
 status.innerText = "Heading: " +
   Math.round(heading) + "°";
 */
+  
 updateBuildings();
 }
 
