@@ -411,7 +411,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline k
+Sheffield Skyline l
 </div>
 
 <button id="start">
@@ -665,7 +665,7 @@ document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
   
 document.getElementById("arLayer").style.transform =
-    `rotate(${phoneRoll * 0.3}deg)`;
+    `rotate(${phoneRoll * 0.1}deg)`;
   
 const seaLevelPercent =
     Math.max(
@@ -687,7 +687,7 @@ const seaLevelPercent =
     )`;
   
   document.getElementById("terrainOverlay").style.transform =
-    `rotate(${phoneRoll * 0.3}deg)`;
+    `rotate(${phoneRoll * 0.1}deg)`;
   
 if (
 userLat === null ||
@@ -1046,6 +1046,8 @@ if (userElevation !== null) {
     Math.round(userElevation) +
     "m | Pitch: " +
     Math.round(phonePitch) +
+    "°" | Roll: " +
+    Math.round(phoneRoll) + 
     "°";
 
 } else {
