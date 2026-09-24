@@ -471,6 +471,7 @@ let userLon = null;
 let userElevation = null;
 let heading = null;
 let phonePitch = 0;
+let phoneRoll = 0;
 
 const status = document.getElementById("status");
 const startButton = document.getElementById("start");
@@ -651,7 +652,10 @@ const seaLevelY =
 
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
-
+  
+document.getElementById("seaLevel").style.transform =
+    `rotate(${phoneRoll * 0.5}deg)`;
+  
 const seaLevelPercent =
     Math.max(
         0,
@@ -670,6 +674,9 @@ const seaLevelPercent =
         rgba(89,99,78,0.08) ${seaLevelPercent}%,
         rgba(89,99,78,0.15) 100%
     )`;
+  
+  document.getElementById("terrainOverlay").style.transform =
+    `rotate(${phoneRoll * 0.5}deg)`;
   
 if (
 userLat === null ||
@@ -1311,13 +1318,7 @@ function handleOrientation(event) {
 
 let newHeading = null;
 
-
-
-/*
-
-iPhone / Safari
-
-*/
+/* iPhone / Safari */
 
 if (
 
@@ -1333,13 +1334,7 @@ event.webkitCompassHeading;
 
 }
 
-
-
-/*
-
-Other browsers
-
-*/
+/*  Other browsers */
 
 else if (
 
@@ -1355,6 +1350,12 @@ newHeading =
   if (typeof event.beta === "number") {
     phonePitch = 90 - event.beta;
 }
+
+/* roll angle */
+
+if (typeof event.gamma === "number") {
+    phoneRoll = event.gamma;
+}
   
 if (newHeading !== null) {
   
@@ -1368,6 +1369,7 @@ document
   Math.round(heading) + "°";
 
 /* show updated elevation and pitch in status bar */
+  
 status.innerText =
     "Elev: " +
     Math.round(userElevation) +
