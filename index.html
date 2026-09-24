@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline a
+Sheffield Skyline b
 </div>
 
 <button id="start">
@@ -460,6 +460,9 @@ BUILDINGS
 let buildings = [];
 
   async function loadBuildings() {
+    console.log(
+    "Loading buildings"
+);
     try {
       const response = await fetch("buildings.json");
 
