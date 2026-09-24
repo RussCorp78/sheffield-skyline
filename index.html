@@ -657,12 +657,16 @@ const seaLevelAngle =
         1000
     ) * 180 / Math.PI;
 
+/* to replace when sorted
 const seaLevelY =
     35 -
     (
         (calibratedPitch - seaLevelAngle) /
         verticalFieldOfView
-    ) * 100;  
+    ) * 100;  */
+
+const seaLevelY =
+    35 + (calibratedPitch * 0.5);
 
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
