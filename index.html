@@ -648,7 +648,7 @@ const groundY =
 
 /* updated Ground position based on pitch and elevation of phone */
 const verticalFieldOfView = 60;
-const calibratedPitch = phonePitch + pitchOffset;  
+const calibratedPitch = phonePitch;  
 const seaLevelDifference = 0;
 
 const seaLevelAngle =
@@ -1390,7 +1390,7 @@ status.innerText =
     "Elev: " +
     Math.round(userElevation) +
     "m | Pitch: " +
-    Math.round(calibratedPitch) +
+    Math.round(phonePitch) +
     "° | Roll: " +
     Math.round(phoneRoll) +
     "°";
