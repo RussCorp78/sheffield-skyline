@@ -412,7 +412,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline o
+Sheffield Skyline p
 </div>
 
 <button id="start">
@@ -486,7 +486,7 @@ let phonePitch = 0;
 let phoneRoll = 0;
 
 const pitchOffset = 10;
-const calibratedPitch = phonePitch + pitchOffset;
+
 const status = document.getElementById("status");
 const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
@@ -648,7 +648,7 @@ const groundY =
 
 /* updated Ground position based on pitch and elevation of phone */
 const verticalFieldOfView = 60;
-  
+const calibratedPitch = phonePitch + pitchOffset;  
 const seaLevelDifference = 0;
 
 const seaLevelAngle =
@@ -1048,7 +1048,7 @@ if (userElevation !== null) {
      "Elev: " +
     Math.round(userElevation) +
     "m | Pitch: " +
-    Math.round(calibratedPitch) +
+    Math.round(phonePitch) +
     "° | Roll: " +
     Math.round(phoneRoll) +
     "°";
@@ -1364,7 +1364,7 @@ newHeading =
   
 /* up/down angle */
   if (typeof event.beta === "number") {
-    phonedPitch = 90 - event.beta;
+    phonePitch = 90 - event.beta;
 }
 
 /* roll angle */
