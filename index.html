@@ -11,6 +11,8 @@ initial-scale=1.0,
 maximum-scale=1.0,
 user-scalable=no">
 
+<meta name="screen-orientation" content="portrait">
+
 <title>Sheffield Skyline</title>
 
 
@@ -412,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline r
+Sheffield Skyline s
 </div>
 
 <button id="start">
@@ -666,7 +668,7 @@ const seaLevelY =
     ) * 100;  */
 
 const seaLevelY =
-    45 + (calibratedPitch * 0.5);
+    45 - (calibratedPitch * 0.5);
 
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
