@@ -388,7 +388,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline b
+Sheffield Skyline c
 </div>
 
 <button id="start">
@@ -929,11 +929,9 @@ userElevation = position.coords.altitude;
 
 if (userElevation !== null) {
 
-    status.innerText =
-    "Elevation: " +
+   status.innerText =
+    "Elev: " +
     Math.round(userElevation) +
-    "m (±" +
-    Math.round(position.coords.altitudeAccuracy) +
     "m | Pitch: " +
     Math.round(phonePitch) +
     "°";
