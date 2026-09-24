@@ -388,7 +388,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline q
+Sheffield Skyline a
 </div>
 
 <button id="start">
@@ -927,12 +927,21 @@ userLon = position.coords.longitude;
 userElevation = position.coords.altitude;
   console.log(position.coords);
 
-status.innerText =
+if (userElevation !== null) {
+
+    status.innerText =
     "Elevation: " +
     Math.round(userElevation) +
     "m (±" +
     Math.round(position.coords.altitudeAccuracy) +
     "m)";
+
+} else {
+
+    status.innerText =
+        "Elevation unavailable";
+}
+
 
 
 loadBuildings();
@@ -1008,9 +1017,11 @@ async function startCamera() {
         startButton.style.display = "none";
         stopButton.style.display = "block";
 
-        status.innerText =
+       /* status update
+       status.innerText =
             "Camera started. Starting compass…";
-
+      */
+      
     } catch (error) {
 
         status.style.display = "block";
