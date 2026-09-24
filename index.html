@@ -412,7 +412,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline n
+Sheffield Skyline o
 </div>
 
 <button id="start">
@@ -485,6 +485,8 @@ let heading = null;
 let phonePitch = 0;
 let phoneRoll = 0;
 
+const pitchOffset = 10;
+const calibratedPitch = phonePitch + pitchOffset;
 const status = document.getElementById("status");
 const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
@@ -658,7 +660,7 @@ const seaLevelAngle =
 const seaLevelY =
     35 -
     (
-        (phonePitch - seaLevelAngle) /
+        (calibratedPitch - seaLevelAngle) /
         verticalFieldOfView
     ) * 100;  
 
@@ -858,7 +860,7 @@ const verticalScale = 3;
 
 
 const relativeVerticalAngle =
-    groundAngle - phonePitch;
+    groundAngle - calibratedPitch;
 /* elevation based on distance
 const groundY =
     30 -
@@ -871,7 +873,7 @@ const groundY =
   const groundY =
     30 -
     (groundElevation * 0.08) +
-    (phonePitch * 1.5);
+    (calibratedPitch * 1.5);
 
 /* old height code
 const lineHeight =
@@ -1046,7 +1048,7 @@ if (userElevation !== null) {
      "Elev: " +
     Math.round(userElevation) +
     "m | Pitch: " +
-    Math.round(phonePitch) +
+    Math.round(calibratedPitch) +
     "° | Roll: " +
     Math.round(phoneRoll) +
     "°";
@@ -1362,7 +1364,7 @@ newHeading =
   
 /* up/down angle */
   if (typeof event.beta === "number") {
-    phonePitch = 90 - event.beta;
+    calibratedPitch = 90 - event.beta;
 }
 
 /* roll angle */
@@ -1388,7 +1390,7 @@ status.innerText =
     "Elev: " +
     Math.round(userElevation) +
     "m | Pitch: " +
-    Math.round(phonePitch) +
+    Math.round(calibratedPitch) +
     "° | Roll: " +
     Math.round(phoneRoll) +
     "°";
