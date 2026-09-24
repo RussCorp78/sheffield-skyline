@@ -412,7 +412,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline p
+Sheffield Skyline q
 </div>
 
 <button id="start">
@@ -666,13 +666,13 @@ const seaLevelY =
     ) * 100;  */
 
 const seaLevelY =
-    35 + (calibratedPitch * 0.5);
+    45 + (calibratedPitch * 0.5);
 
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
   
 document.getElementById("arLayer").style.transform =
-    `rotate(${-phoneRoll * 0.1}deg)`;
+    `rotate(${phoneRoll * 0.1}deg)`;
   
 const seaLevelPercent =
     Math.max(
@@ -693,8 +693,10 @@ const seaLevelPercent =
         rgba(89,99,78,0.15) 100%
     )`;
   
+  /* removed and can probably be deleted
   document.getElementById("terrainOverlay").style.transform =
-    `rotate(${-phoneRoll * 0.1}deg)`;
+    `rotate(${phoneRoll * 0.1}deg)`;
+  */
   
 if (
 userLat === null ||
