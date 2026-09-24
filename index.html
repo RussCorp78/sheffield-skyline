@@ -924,12 +924,14 @@ position => {
 
 userLat = position.coords.latitude;
 userLon = position.coords.longitude;
-userElevation = 100;
+userElevation = position.coords.altitude;
 
 status.innerText =
-"Elevation: " +
-  Math.round(userElevation) +
-  "m";
+    "Elevation: " +
+    Math.round(userElevation) +
+    "m (±" +
+    Math.round(position.coords.altitudeAccuracy) +
+    "m)";
 
 
 loadBuildings();
