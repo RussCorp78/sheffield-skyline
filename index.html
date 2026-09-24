@@ -279,9 +279,16 @@ z-index: 15;
     position: absolute;
     left: 0;
     right: 0;
-    border-top: 2px dashed rgba(255,255,255,0.35);
+    border-top: 2px dashed rgba(255,255,255,0.15);
     pointer-events: none;
     z-index: 5;
+}
+
+#terrainOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
 }
   
 /* ---------------------------
@@ -416,6 +423,7 @@ N
 </div>
   
 <div id="seaLevel"></div>
+<div id="terrainOverlay"></div>
   
 <div id="landmarkInfo">
 <h2 id="infoName"></h2>
@@ -643,6 +651,25 @@ const seaLevelY =
 
 document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
+
+const seaLevelPercent =
+    Math.max(
+        0,
+        Math.min(
+            100,
+            seaLevelY
+        )
+    );
+
+  document.getElementById("terrainOverlay")
+    .style.background =
+    `linear-gradient(
+        to bottom,
+        rgba(135,206,235,0.10) 0%,
+        rgba(135,206,235,0.05) ${seaLevelPercent}%,
+        rgba(89,99,78,0.05) ${seaLevelPercent}%,
+        rgba(89,99,78,0.10) 100%
+    )`;
   
 if (
 userLat === null ||
