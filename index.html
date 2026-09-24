@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline v
+Sheffield Skyline w
 </div>
 
 <button id="start">
@@ -869,19 +869,18 @@ const verticalScale = 3;
 
 const relativeVerticalAngle =
     groundAngle - calibratedPitch;
-/* elevation based on distance
+  
+/* elevation based on distance: const groundY = 30 - (relativeVerticalAngle / verticalFieldOfView) * 100;  */
+  
+/* elevation ignoring distance: const groundY = 40 - (groundElevation * 0.04) - (calibratedPitch * 0.5);  */
+
+  /* elevation relative to sea level line */
+const elevationScale = 0.12;
+
 const groundY =
-    30 -
-    (
-        relativeVerticalAngle /
-        verticalFieldOfView
-    ) * 100;
-    */
-  /* elevation ignoring distance */
-  const groundY =
-    40 -
-    (groundElevation * 0.04) -
-    (calibratedPitch * 0.5);
+    seaLevelY -
+    (groundElevation * elevationScale);
+  
 
 /* old height code
 const lineHeight =
