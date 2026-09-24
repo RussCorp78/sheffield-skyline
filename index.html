@@ -411,7 +411,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline l
+Sheffield Skyline m
 </div>
 
 <button id="start">
@@ -665,7 +665,7 @@ document.getElementById("seaLevel").style.top =
     seaLevelY + "%";
   
 document.getElementById("arLayer").style.transform =
-    `rotate(${phoneRoll * 0.1}deg)`;
+    `rotate(${-phoneRoll * 0.1}deg)`;
   
 const seaLevelPercent =
     Math.max(
@@ -687,7 +687,7 @@ const seaLevelPercent =
     )`;
   
   document.getElementById("terrainOverlay").style.transform =
-    `rotate(${phoneRoll * 0.1}deg)`;
+    `rotate(${-phoneRoll * 0.1}deg)`;
   
 if (
 userLat === null ||
@@ -1042,10 +1042,12 @@ userElevation = position.coords.altitude;
 if (userElevation !== null) {
 
    status.innerText =
-    "Pitch: " +
+     "Elev: " +
+    Math.round(userElevation) +
+    "m | Pitch: " +
     Math.round(phonePitch) +
     "° | Roll: " +
-    Math.round(phoneRoll) + 
+    Math.round(phoneRoll) +
     "°";
 
 } else {
@@ -1386,6 +1388,8 @@ status.innerText =
     Math.round(userElevation) +
     "m | Pitch: " +
     Math.round(phonePitch) +
+    "° | Roll: " +
+    Math.round(phoneRoll) +
     "°";
   
 /* Add Heading in the status bar at the bottom
