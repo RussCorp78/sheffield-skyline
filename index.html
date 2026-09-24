@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline z
+Sheffield Skyline a
 </div>
 
 <button id="start">
@@ -1167,16 +1167,29 @@ STOP CAMERA
 
 function stopCamera() {
 
+    // Stop orientation updates first
+    window.removeEventListener(
+        "deviceorientation",
+        handleOrientation,
+        true
+    );
+
+    window.removeEventListener(
+        "deviceorientationabsolute",
+        handleOrientation,
+        true
+    );
+
+    // Reset stored readings
     heading = null;
     userLat = null;
     userLon = null;
     userElevation = null;
     phonePitch = 0;
     phoneRoll = 0;
-  
-    // Stop every track belonging to the camera stream
-    if (camera.srcObject) {
 
+    // Stop all camera tracks
+    if (camera.srcObject) {
         camera.srcObject
             .getTracks()
             .forEach(track => track.stop());
@@ -1184,72 +1197,52 @@ function stopCamera() {
         camera.srcObject = null;
     }
 
-    // Hide the video
+    // Hide the camera
     camera.style.display = "none";
 
-    // Restore the sky and ground holding screen
+    // Restore the holding-screen background
     document
         .getElementById("sky")
         .classList.remove("camera-active");
 
-    // Hide all building markers
+    // Remove only the building markers
     document
-        .querySelectorAll(".building")
-        .forEach(marker => { marker.remove();
-         });
-  
-  const arLayer =
-    document.getElementById("arLayer");
+        .querySelectorAll("#arLayer .building")
+        .forEach(marker => {
+            marker.remove();
+        });
 
-arLayer.innerHTML = `
-    <div id="terrainOverlay"></div>
-    <div id="seaLevel"></div>
-`;
-
+    // Clear the stored marker reference for every building
     buildings.forEach(building => {
-    building.marker = null;
-      });
-  
-const arLayer =
-    document.getElementById("arLayer");
+        building.marker = null;
+    });
 
-arLayer.innerHTML = '
-    <div id="terrainOverlay"></div>
-    <div id="seaLevel"></div>
-  ';
+    // Reset the AR layer's rotation
+    document
+        .getElementById("arLayer")
+        .style.transform = "rotate(0deg)";
 
-  
-    // Close the landmark information panel if open
+    // Reset the sea-level line
+    document
+        .getElementById("seaLevel")
+        .style.top = "60%";
+
+    // Close the landmark information panel
     landmarkInfo.style.display = "none";
 
-    // Restore the buttons
+    // Restore buttons
     startButton.style.display = "block";
     stopButton.style.display = "none";
 
-    // Reset the compass display
+    // Reset compass
     document
         .getElementById("compass")
         .innerText = "N";
-  
-/* Remove orientation listeners */    
-  window.removeEventListener(
-    "deviceorientation",
-    handleOrientation,
-    true
-);
 
-window.removeEventListener(
-    "deviceorientationabsolute",
-    handleOrientation,
-    true
-);
-
-/* Restore the status message */
+    // Restore status
     status.style.display = "block";
     status.innerText = "Ready to start";
 }
-
-
 
 /* =====================================================
 COMPASS
