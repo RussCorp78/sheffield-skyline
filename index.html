@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline y
+Sheffield Skyline z
 </div>
 
 <button id="start">
@@ -1209,6 +1209,15 @@ arLayer.innerHTML = `
     buildings.forEach(building => {
     building.marker = null;
       });
+  
+const arLayer =
+    document.getElementById("arLayer");
+
+arLayer.innerHTML = '
+    <div id="terrainOverlay"></div>
+    <div id="seaLevel"></div>
+  ';
+
   
     // Close the landmark information panel if open
     landmarkInfo.style.display = "none";
