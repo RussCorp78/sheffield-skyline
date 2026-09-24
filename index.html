@@ -244,7 +244,7 @@ COMPASS DISPLAY
 
 position: absolute;
 
-top: 50%;
+top: 65%;
 left: 50%;
 
 transform:
@@ -275,7 +275,17 @@ font-weight: bold;
 z-index: 15;
 }
 
+#seaLevel {
+    position: absolute;
+    left: 0;
+    right: 0;
 
+    border-top: 2px dashed rgba(255,255,255,0.35);
+
+    pointer-events: none;
+    z-index: 5;
+}
+  
 /* ---------------------------
 BUILDING LABEL
 
@@ -388,7 +398,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline f
+Sheffield Skyline g
 </div>
 
 <button id="start">
@@ -406,7 +416,9 @@ Waiting to start…
 <div id="compass">
 N
 </div>
-
+  
+<div id="seaLevel"></div>
+  
 <div id="landmarkInfo">
 <h2 id="infoName"></h2>
 <p id="infoHeight"></p>
@@ -608,7 +620,25 @@ UPDATE BUILDINGS
 ===================================================== */
 
 function updateBuildings() {
+  
+const seaLevelDifference = 0;
 
+const seaLevelAngle =
+    Math.atan2(
+        seaLevelDifference,
+        1000
+    ) * 180 / Math.PI;
+
+const seaLevelY =
+    35 -
+    (
+        (seaLevelAngle - phonePitch) /
+        verticalFieldOfView
+    ) * 100;  
+
+document.getElementById("seaLevel").style.top =
+    seaLevelY + "%";
+  
 if (
 userLat === null ||
 userLon === null ||
@@ -785,7 +815,7 @@ const relativeVerticalAngle =
     groundAngle - phonePitch;
 
 const groundY =
-    40 -
+    30 -
     (
         relativeVerticalAngle /
         verticalFieldOfView
