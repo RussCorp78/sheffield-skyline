@@ -388,7 +388,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline e
+Sheffield Skyline f
 </div>
 
 <button id="start">
@@ -770,10 +770,22 @@ VERTICAL SCREEN SCALE
 const verticalScale = 3;
 
 
-/* Ground position on screen */
+/* Original Ground position on screen
+const groundY =
+  60 - (groundElevation * 0.2); */
+
+/* updated Ground position based on pitch and elevation of phone */
+const verticalFieldOfView = 60;
+
+const relativeVerticalAngle =
+    groundAngle - phonePitch;
 
 const groundY =
-  60 - (groundElevation * 0.2);
+    50 -
+    (
+        relativeVerticalAngle /
+        verticalFieldOfView
+    ) * 100;
 
 const lineHeight =
     Math.max(
