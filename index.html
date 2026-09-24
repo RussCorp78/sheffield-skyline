@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline b
+Sheffield Skyline c
 </div>
 
 <button id="start">
@@ -459,24 +459,52 @@ BUILDINGS
 
 let buildings = [];
 
-  async function loadBuildings() {
-    console.log(
-    "Loading buildings"
-);
+async function loadBuildings() {
+
     try {
-      const response = await fetch("buildings.json");
 
-      buildings = await response.json();
+        const response =
+            await fetch("buildings.json");
 
-      console.log("Buildings loaded", buildings.length);
-      document.getElementById("compass").innerText = "Buildings loaded: " + buildings.length + " buildings";
-      updateBuildings()
+        const loadedBuildings =
+            await response.json();
+
+        // Remove any marker that might have appeared
+        // while the data was loading
+        document
+            .querySelectorAll("#arLayer .building")
+            .forEach(marker => {
+                marker.remove();
+            });
+
+        // Store the newly loaded data
+        buildings = loadedBuildings;
+
+        console.log(
+            "Buildings loaded",
+            buildings.length
+        );
+
+        document
+            .getElementById("compass")
+            .innerText =
+            "Buildings loaded: " +
+            buildings.length +
+            " buildings";
+
+        updateBuildings();
 
     } catch (error) {
-      console.error("Could not load buildings:", error);
-      status.innerText = "Could not load building data.";
+
+        console.error(
+            "Could not load buildings:",
+            error
+        );
+
+        status.innerText =
+            "Could not load building data.";
     }
-  }
+}
 
 
 /* =====================================================
@@ -1215,10 +1243,9 @@ function stopCamera() {
             marker.remove();
         });
 
-    // Clear the stored marker reference for every building
-    buildings.forEach(building => {
-        building.marker = null;
-    });
+    // Empty the building data so old markers cannot be
+    // recreated while buildings.json reloads
+    buildings = [];
 
     // Reset the AR layer's rotation
     document
