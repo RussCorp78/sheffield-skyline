@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline x
+Sheffield Skyline y
 </div>
 
 <button id="start">
@@ -1222,7 +1222,20 @@ arLayer.innerHTML = `
         .getElementById("compass")
         .innerText = "N";
   
-    // Restore the status message
+/* Remove orientation listeners */    
+  window.removeEventListener(
+    "deviceorientation",
+    handleOrientation,
+    true
+);
+
+window.removeEventListener(
+    "deviceorientationabsolute",
+    handleOrientation,
+    true
+);
+
+/* Restore the status message */
     status.style.display = "block";
     status.innerText = "Ready to start";
 }
