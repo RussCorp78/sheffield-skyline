@@ -279,9 +279,7 @@ z-index: 15;
     position: absolute;
     left: 0;
     right: 0;
-
     border-top: 2px dashed rgba(255,255,255,0.35);
-
     pointer-events: none;
     z-index: 5;
 }
@@ -398,7 +396,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline g
+Sheffield Skyline h
 </div>
 
 <button id="start">
@@ -620,6 +618,13 @@ UPDATE BUILDINGS
 ===================================================== */
 
 function updateBuildings() {
+
+/* Original Ground position on screen
+const groundY =
+  60 - (groundElevation * 0.2); */
+
+/* updated Ground position based on pitch and elevation of phone */
+const verticalFieldOfView = 60;
   
 const seaLevelDifference = 0;
 
@@ -804,12 +809,7 @@ VERTICAL SCREEN SCALE
 const verticalScale = 3;
 
 
-/* Original Ground position on screen
-const groundY =
-  60 - (groundElevation * 0.2); */
 
-/* updated Ground position based on pitch and elevation of phone */
-const verticalFieldOfView = 60;
 
 const relativeVerticalAngle =
     groundAngle - phonePitch;
