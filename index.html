@@ -414,7 +414,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline w
+Sheffield Skyline x
 </div>
 
 <button id="start">
@@ -1171,6 +1171,8 @@ function stopCamera() {
     userLat = null;
     userLon = null;
     userElevation = null;
+    phonePitch = 0;
+    phoneRoll = 0;
   
     // Stop every track belonging to the camera stream
     if (camera.srcObject) {
@@ -1195,6 +1197,14 @@ function stopCamera() {
         .querySelectorAll(".building")
         .forEach(marker => { marker.remove();
          });
+  
+  const arLayer =
+    document.getElementById("arLayer");
+
+arLayer.innerHTML = `
+    <div id="terrainOverlay"></div>
+    <div id="seaLevel"></div>
+`;
 
     buildings.forEach(building => {
     building.marker = null;
