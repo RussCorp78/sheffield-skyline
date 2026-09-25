@@ -358,12 +358,20 @@ heading === null
 return;
 }
 
-/* const showBuildings =
+const showBuildings =
     document.getElementById("showLandmarks").checked;
 
 const showHills =
     document.getElementById("showHills").checked;
-*/    
+
+status.style.display = "block";
+
+status.innerText =
+    "Buildings: " +
+    showBuildings +
+    " Hills: " +
+    showHills;
+  
 buildings.forEach(building => {
 
   
@@ -372,7 +380,7 @@ buildings.forEach(building => {
 if (!building.marker) {
 
 building.marker =
-document.createElement("div");
+  document.createElement("div");
 
 building.marker.className =
 "building";
@@ -413,23 +421,14 @@ document
 .getElementById("arLayer")
 .appendChild(building.marker);
 }
-
-    const shouldShowBuilding =
-        building.type === "building" &&
-        showBuildings;
-
-    const shouldShowHill =
-        building.type === "hill" &&
-        showHills;
-
-    const shouldShow =
-        shouldShowBuilding ||
-        shouldShowHill;
-
-    if (!shouldShow) {
-        building.marker.style.display = "none";
-        return;
-    }
+  
+if (
+    (building.type === "building" && !showBuildings) ||
+    (building.type === "hill" && !showHills)
+) {
+    building.marker.style.display = "none";
+    return;
+}
 
 // Calculate distance
 const buildingDistance =
@@ -462,10 +461,10 @@ difference =
 // Hide buildings outside our 120° view
 if (Math.abs(difference) > 60) {
 
-building.marker.style.display =
-"none";
+building.marker.style.display = "none";
 
 return;
+  
 } else {
   building.marker.style.display = "block";
 }
@@ -1117,17 +1116,11 @@ FILTER CHECKBOXES
 
 document
     .getElementById("showLandmarks")
-    .addEventListener(
-        "change",
-        updateBuildings
-    );
+    .addEventListener("change", updateBuildings);
 
 document
     .getElementById("showHills")
-    .addEventListener(
-        "change",
-        updateBuildings
-    );    
+    .addEventListener("change", updateBuildings);    
   
 /* =====================================================
 START & STOP BUTTONS
