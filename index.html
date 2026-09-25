@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline k </div>
+<div id="title"> Sheffield Skyline l </div>
 
 <div id="toolbar">
   <label>
@@ -86,7 +86,7 @@ async function loadBuildings() {
     try {
 
         const response =
-            await fetch("buildings.json");
+            await fetch("buildings.json?t=" + Date.now());
 
         const loadedBuildings =
             await response.json();
