@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline p </div>
+<div id="title"> Sheffield Skyline q </div>
 
 <div id="toolbar">
   <label>
@@ -663,9 +663,17 @@ const lineHeight =
 POSITION MARKER AT BUILDING GROUND
 ----------------------------------------------------- */
 
-building.marker.style.top =
-    groundY + "%";
+if (building.type === "hill") {
 
+    building.marker.style.top =
+        seaLevelY + "%";
+
+} else {
+
+    building.marker.style.top =
+        groundY + "%";
+
+}
 
 /* -----------------------------------------------------
 POSITION BUILDING LINE
