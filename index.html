@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline l </div>
+<div id="title"> Sheffield Skyline m </div>
 
 <div id="toolbar">
   <label>
@@ -371,11 +371,31 @@ const showHills =
   
 buildings.forEach(building => {
 
+  if (
+    building.type === "building" &&
+    !showBuildings
+) {
+    if (building.marker) {
+        building.marker.style.display = "none";
+    }
+    return;
+}
+
+if (
+    building.type === "hill" &&
+    !showHills
+) {
+    if (building.marker) {
+        building.marker.style.display = "none";
+    }
+    return;
+}
   
 // Create the building marker 
 
 if (!building.marker) {
 
+  
 building.marker =
   document.createElement("div");
 
@@ -418,6 +438,7 @@ document
 .getElementById("arLayer")
 .appendChild(building.marker);
 }
+building.marker.style.display = "block";
 /*  
 if (
     (building.type === "building" && !showBuildings) ||
