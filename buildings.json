@@ -67,8 +67,8 @@
     "type": "hill",
     "lat": 53.38442,
     "lon": -1.87234,
-    "height": 636,
-    "Elevation": 0,
+    "height": 0,
+    "Elevation": 636,
     "info": "The highest point in the peak district"
   },
   {
@@ -76,8 +76,8 @@
     "type": "hill",
     "lat": 53.36440,
     "lon": -1.65872,
-    "height": 458,
-    "Elevation": 0,
+    "height": 0,
+    "Elevation": 458,
     "info": "Lovely place"
   },
   {
@@ -85,8 +85,8 @@
     "type": "hill",
     "lat": 53.35616,
     "lon": -1.63066,
-    "height": 443,
-    "Elevation": 0,
+    "height": 0,
+    "Elevation": 443,
     "info": "Stuff"
   },
   {
@@ -94,17 +94,17 @@
     "type": "hill",
     "lat": 53.33364,
     "lon": -1.61603,
-    "height": 424,
-    "Elevation": 0,
-    "info": "Stuff"
+    "height": 0,
+    "Elevation": 424,
+    "info": "Great"
   },
   {
     "name": "Horse Stone Naze",
     "type": "hill",
     "lat": 53.47444,
     "lon": -1.76324,
-    "height": 521,
-    "Elevation": 0,
+    "height": 0,
+    "Elevation": 521,
     "info": "Stuff"
   },
    {
@@ -112,8 +112,8 @@
     "type": "hill",
     "lat": 53.44525,
     "lon": -1.71848,
-    "height": 548,
-    "Elevation": 0,
+    "height": 0,
+    "Elevation": 548,
     "info": "Highest point in Sheffield and South Yorkshire"
   },
   {
@@ -121,8 +121,8 @@
     "type": "hill",
     "lat": 53.358310,
     "lon": -1.427125,
-    "height": 0,
-    "Elevation": 199,
+    "height": 199,
+    "Elevation": 0,
     "info": "A high part in the East of the city"
   }  
 ]
