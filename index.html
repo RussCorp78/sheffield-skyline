@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline m </div>
+<div id="title"> Sheffield Skyline n </div>
 
 <div id="toolbar">
   <label>
@@ -410,6 +410,13 @@ const line =
 line.className =
   "building-line";
 
+if (building.type === "hill") {
+    line.style.background = "dodgerblue";
+}
+else {
+    line.style.background = "red";
+}  
+  
 building.marker.appendChild(line);
 
   /* Building name */
@@ -423,6 +430,11 @@ label.className =
 label.innerText =
     building.name;
 
+if (building.type === "hill") {
+    label.style.background =
+        "rgba(30,144,255,0.8)";
+}  
+  
 building.marker.appendChild(label);
 
 /* Click information */
