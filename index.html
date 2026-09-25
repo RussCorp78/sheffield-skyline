@@ -427,7 +427,7 @@ muted>
 <div id="sky">
 
 <div id="title">
-Sheffield Skyline e
+Sheffield Skyline f
 </div>
 
 <div id="toolbar">
@@ -772,19 +772,7 @@ const showHills =
     
 buildings.forEach(building => {
 
-    if (
-        building.type === "building" &&
-        !showBuildings
-        ) {
-        return;
-    }
- 
-    if (
-        building.type === "hill" &&
-        !showHills
-        ) {
-        return;
-    }
+  
 // Create the building marker 
 
 if (!building.marker) {
@@ -832,6 +820,22 @@ document
 .appendChild(building.marker);
 }
 
+    const shouldShowBuilding =
+        building.type === "building" &&
+        showBuildings;
+
+    const shouldShowHill =
+        building.type === "hill" &&
+        showHills;
+
+    const shouldShow =
+        shouldShowBuilding ||
+        shouldShowHill;
+
+    if (!shouldShow) {
+        building.marker.style.display = "none";
+        return;
+    }
 
 // Calculate distance
 const buildingDistance =
@@ -1512,6 +1516,24 @@ updateBuildings();
 
 }
 
+/* =====================================================
+FILTER CHECKBOXES
+===================================================== */
+
+document
+    .getElementById("showLandmarks")
+    .addEventListener(
+        "change",
+        updateBuildings
+    );
+
+document
+    .getElementById("showHills")
+    .addEventListener(
+        "change",
+        updateBuildings
+    );    
+    
 /* =====================================================
 START & STOP BUTTONS
 ===================================================== */
