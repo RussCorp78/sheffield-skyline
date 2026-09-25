@@ -583,7 +583,7 @@ const groundY =
     (groundElevation * elevationScale);
   
 
-/* old height code
+/* old height codes
 const lineHeight =
     Math.max(
         25,
@@ -592,10 +592,8 @@ const lineHeight =
             Number(building.height) * 1.5
         )
     );
-    */
 
-/* line height when elevation stays the same */
-  const lineHeight =
+    const lineHeight =
     Math.max(
         10,
         Math.min(
@@ -605,7 +603,31 @@ const lineHeight =
         )
     );
 
+    */
 
+/* line height when elevation stays the same */
+  
+let lineHeight;
+
+if (building.type === "hill") {
+
+    lineHeight =
+        Math.abs(
+            seaLevelY - groundY
+        ) * skyHeight / 100;
+
+} else {
+
+    lineHeight =
+        Math.max(
+            10,
+            Math.min(
+                200,
+                (building.height * 400) /
+                buildingDistance
+            )
+        );
+}
 
 /* Top position on screen */
 
