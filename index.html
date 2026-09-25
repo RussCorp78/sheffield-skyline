@@ -604,7 +604,14 @@ const lineHeight =
     );
 
     */
+/* -----------------------------------------------------
+CALCULATE BUILDING HEIGHT ON SCREEN
+----------------------------------------------------- */
 
+const skyHeight =
+    document
+        .getElementById("sky")
+        .clientHeight;
 /* line height when elevation stays the same */
   
 let lineHeight;
@@ -658,18 +665,6 @@ POSITION MARKER AT BUILDING GROUND
 
 building.marker.style.top =
     groundY + "%";
-
-
-/* -----------------------------------------------------
-CALCULATE BUILDING HEIGHT ON SCREEN
------------------------------------------------------ */
-
-const skyHeight =
-    document
-        .getElementById("sky")
-        .clientHeight;
-
-
 
 
 /* -----------------------------------------------------
