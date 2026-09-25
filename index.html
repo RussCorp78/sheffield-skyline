@@ -754,11 +754,7 @@ const seaLevelPercent =
         rgba(89,99,78,0.15) 100%
     )`;
   
-  /* removed and can probably be deleted
-  document.getElementById("terrainOverlay").style.transform =
-    `rotate(${phoneRoll * 0.1}deg)`;
-  */
-  
+    
 if (
 userLat === null ||
 userLon === null ||
@@ -768,8 +764,27 @@ heading === null
 return;
 }
 
+const showBuildings =
+    document.getElementById("showLandmarks").checked;
+
+const showHills =
+    document.getElementById("showHills").checked;
+    
 buildings.forEach(building => {
 
+    if (
+        building.type === "building" &&
+        !showBuildings
+        ) {
+        return;
+    }
+ 
+    if (
+        building.type === "hill" &&
+        !showHills
+        ) {
+        return;
+    }
 // Create the building marker 
 
 if (!building.marker) {
