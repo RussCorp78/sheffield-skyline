@@ -15,8 +15,9 @@ user-scalable=no">
 
 <title>Sheffield Skyline</title>
 
+<link rel="stylesheet" href="style.css"> 
+  
 </head>
-
 
 <body>
 
@@ -29,66 +30,42 @@ user-scalable=no">
   <main class="app-content">
 
 <!-- CAMERA -->
-
-<video
-id="camera"
-autoplay
-playsinline
-muted>
-</video>
-
-
-
+<video id="camera" autoplay playsinline muted> </video>
+    
 <!-- AR OVERLAY -->
-
 <div id="sky">
 
-<div id="title">
-Sheffield Skyline h
-</div>
+<div id="title"> Sheffield Skyline h </div>
 
 <div id="toolbar">
   <label>
-    <input type="checkbox"
-        id="showLandmarks"
-        checked>
+    <input type="checkbox" id="showLandmarks" checked>
     Landmarks
   </label>
   <label>
-    <input type="checkbox"
-        id="showHills"
-        checked>
+    <input type="checkbox" id="showHills" checked>
     Hills
   </label>
 </div>
   
-<button id="start">
-Start Compass
-</button>
+<button id="start"> Start Compass </button>
   
-<button id="stop" style="display:none;">
-    Exit Camera
-</button>
+<button id="stop" style="display:none;"> Exit Camera </button>
   
-<div id="status">
-Waiting to start…
-</div>
+<div id="status"> Waiting to start… </div>
 
-<div id="compass">
-N
-</div>
+<div id="compass"> N </div>
 
 <div id="arLayer">  
   <div id="terrainOverlay"></div>
   <div id="seaLevel"></div>
-  
 </div> 
   
 <div id="landmarkInfo">
-<h2 id="infoName"></h2>
-<p id="infoHeight"></p>
-<p id="infoText"></p>
-<button id="closeInfo">Close</button>
+  <h2 id="infoName"></h2>
+  <p id="infoHeight"></p>
+  <p id="infoText"></p>
+  <button id="closeInfo">Close</button>
 </div>
   
 </div>
