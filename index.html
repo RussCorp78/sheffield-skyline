@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline q </div>
+<div id="title"> Sheffield Skyline r </div>
 
 <div id="toolbar">
   <label>
@@ -404,20 +404,22 @@ building.marker.className =
 
 /* Building line */
   
-const line =
+let shape =
   document.createElement("div");
 
-line.className =
-  "building-line";
-
 if (building.type === "hill") {
-    line.style.background = "dodgerblue";
+
+    shape.className =
+      "hill-shape";
+
+} else {
+
+    shape.className =
+      "building-line";
+
 }
-else {
-    line.style.background = "red";
-}  
-  
-building.marker.appendChild(line);
+
+building.marker.appendChild(shape);
 
   /* Building name */
 
@@ -679,12 +681,33 @@ if (building.type === "hill") {
 POSITION BUILDING LINE
 ----------------------------------------------------- */
 
-const line =
-    building.marker
-        .querySelector(".building-line");
+if (building.type === "hill") {
 
-line.style.height =
-    lineHeight + "px";
+    const hill =
+        building.marker
+            .querySelector(".hill-shape");
+
+    const hillWidth =
+        Math.max(
+            30,
+            lineHeight * 0.6
+        );
+
+    hill.style.height =
+        lineHeight + "px";
+
+    hill.style.width =
+        hillWidth + "px";
+
+} else {
+
+    const line =
+        building.marker
+            .querySelector(".building-line");
+
+    line.style.height =
+        lineHeight + "px";
+}
 
 
 /* -----------------------------------------------------
