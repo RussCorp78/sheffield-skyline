@@ -281,13 +281,13 @@ BUILDING LABEL
 
  .building-line {
   position: absolute;
-  bottom: 100%;
+  bottom: 0;
   left: 50%;
-  width: 6px;
+  height: 0;
+  width: 5px;
   background: red;
   transform: translateX(-50%);
   transform-origin: bottom;
-  height: 0;
   pointer-events: none;
   z-index: 1;
 }
@@ -380,13 +380,10 @@ BUILDING LABEL
     position: absolute;
     left: 50%;
     bottom: 0;
-
     transform: translateX(-50%);
-
     background: rgba(30,144,255,0.8);
-
     border-radius: 100% 100% 0 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
-``
   
 </style>
