@@ -375,6 +375,18 @@ BUILDING LABEL
     align-items: center;
     gap: 4px;
 }
-  
+
+.hill-shape {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    background: rgba(30,144,255,0.8);
+
+    border-radius: 100% 100% 0 0;
+}
+``
   
 </style>
