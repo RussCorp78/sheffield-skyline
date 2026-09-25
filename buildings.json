@@ -121,8 +121,8 @@
     "type": "hill",
     "lat": 53.358310,
     "lon": -1.427125,
-    "height": 199,
-    "Elevation": 0,
+    "height": 1,
+    "Elevation": 199,
     "info": "A high part in the East of the city"
   }  
 ]
