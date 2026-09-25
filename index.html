@@ -35,7 +35,7 @@ user-scalable=no">
 <!-- AR OVERLAY -->
 <div id="sky">
 
-<div id="title"> Sheffield Skyline i </div>
+<div id="title"> Sheffield Skyline j </div>
 
 <div id="toolbar">
   <label>
@@ -360,7 +360,12 @@ return;
 
 const showBuildings =
     document.getElementById("showLandmarks").checked;
+status.style.display = "block";
 
+status.innerText =
+    "Buildings loaded: " +
+    buildings.length;
+  
 const showHills =
     document.getElementById("showHills").checked;
 
