@@ -1,5 +1,3 @@
-<style>
-
 /* ---------------------------
 BASIC PAGE
 --------------------------- */
@@ -275,36 +273,6 @@ z-index: 15;
     pointer-events: none;
     z-index: 4;
 }
-  
-/* ---------------------------
-BUILDING LABEL
-
- .building-line {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  height: 0;
-  width: 5px;
-  background: red;
-  transform: translateX(-50%);
-  transform-origin: bottom;
-  pointer-events: none;
-  z-index: 1;
-}
-  .building {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  padding: 7px 10px;
-  background: rgba(0,0,0,0.75);
-  color: white;
-  border-radius: 8px;
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  z-index: 10;
-}
---------------------------- */
 
 /* Invisible anchor positioned at the building's ground level */
 .building {
@@ -312,7 +280,7 @@ BUILDING LABEL
     width: 0;
     height: 0;
 
-    /* Centre horizontally, but do not move vertically */
+ /* Centre horizontally, but do not move vertically */
     transform: translateX(-50%);
 
     overflow: visible;
@@ -385,5 +353,3 @@ BUILDING LABEL
     border-radius: 100% 100% 0 0;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
-  
-</style>
